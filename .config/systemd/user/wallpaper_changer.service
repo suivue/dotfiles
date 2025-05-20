@@ -1,0 +1,10 @@
+[Unit]
+Description=Change the wallpaper at regular intervals
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /home/sv/.local/bin/wallpaper_changer.sh
+
+[Install]
+WantedBy=graphical.target
+
