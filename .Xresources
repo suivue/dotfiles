@@ -1,21 +1,61 @@
 !!!Xresources configuration
 
 !!Xft settings
-Xft.dpi: 96
+*dpi: 110
+!Xft.dpi: 96
+Xft.dpi: 110
 Xft.antialias: true
 Xft.hinting: true
 Xft.autohint: false
 Xft.hintstyle: hintslight
-Xft.rgba: rgb
+Xft.rgba: none
 Xft.lcdfilter: lcddefault
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!
+!!Fonts (theory :)
+!!
+!!Fonts can be specified in two ways; XLFD and XFT
+!!
+!!X Logical Font Definition (XLFD), used (mostly?) for bitmap fonts has
+!!following format:
+!!-fndry-fmly-wght-slant-sWdth-adstyl-pxlsz-ptSz-resx-resy-spc-avgWdth-rgstry-\
+!!                                                                      encdng
+!! e.g. XTerm*font: -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
+!!      XTerm*font: -schumacher-clean-medium-r-normal-*-15-*-*-*-*-*-*-*
+!!
+!!X FreeType (XFT), used for ttf/otf fonts rendered by freetype2 has
+!!following format:
+!!      XTerm*faceName: Monospace
+!!      XTerm*faceSize: 10
+!!Or in single line as below
+!!      XTerm*faceName: xft:Monospace:size=10
+!!      XTerm*faceName: Hack:pixelsize=14:antialias=true:hintstyle=hintfull
+!!
+!!Here, 'size' is for size in 'pt' and 'pixelsize' is for size in 'px'
+!!
+!!By default, if both bitmap and truetype fonts are set, truetype is used. 
+!!To start with truetype font disabled (to force use of XLFD font) use below
+!!XTerm*renderFont: false
+!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 !!XTerm settings
-XTerm*faceName: xft:monospace:pixelsize=14
-!XTerm*faceName: DejaVu Sans Mono:style=Book:size=10
-!Following to force use of X Logical Font Description (XLFD)
+!! If any of the Xterm settins do not work, try chaning their
+!! capitalization. e.g., if XTerm*termName does not seem to work
+!! try xterm*termName.
+!
+!!Following to force use of X Logical Font Description (XLFD)
 !XTerm.vt100.renderFont: false
 !XTerm*font: -*-fixed-medium-r-normal-*-15-*-*-*-*-*-*-*
 !XTerm*font: -xos4-terminus-medium-r-normal-*-14-*-*-*-*-*-*-*
+!
+!XTerm*faceName: xft:monospace:pixelsize=14
+!XTerm*faceName: DejaVu Sans Mono:style=Book:size=10
+!XTerm*faceName: xft:Adwaita Mono:size=11
+!XTerm*faceName: xft:JetBrains Mono:size=11
+!XTerm*faceName: xft:Fira Code:size=11
+*faceName: xft:Cascadia Code:style=Light:size=11
 
 !!Some fonts do not look good in bold mode. To disable bold fonts,
 !!When using font (XLFD)
@@ -23,19 +63,20 @@ XTerm*faceName: xft:monospace:pixelsize=14
 !!When using faceName (Xft)
 !XTerm*allowBoldFonts: false
 
-XTerm*termName: xterm-256color
-XTerm*title: Terminal (XTerm)
+xterm*termName: xterm-256color
+xterm*title: Terminal (XTerm)
 
 
 !!Urxvt settings
-URxvt*font: xft:Monospace:pixelsize=14
+!URxvt*font: xft:Monospace:pixelsize=14
+URxvt*font: xft:Cascadia Code:style=Light:pixelsize=14
 !urxvt*font: -misc-fixed-medium-r-normal--15-*-*-*-*-*-*-*
 URxvt*boldFont:
 !URxvt*lineSpacing: 0
 urxvt.letterSpace: -1
 !!fake transparency
-!urxvt.transparent: true
-!urxvt.shading: 32
+urxvt.transparent: true
+urxvt.shading: 32
 
 !!Common settings
 *.scrollBar: false
@@ -48,7 +89,7 @@ urxvt.letterSpace: -1
 !!1) Arch wiki
 !!2) http://www.futurile.net/2016/06/14/xterm-setup-and-truetype-font-configuration
 
-XTerm.vt100.translations: #override \n\
+xterm.vt100.translations: #override \n\
     Ctrl <Key> plus: larger-vt-font() \n\
     Ctrl <Key> minus: smaller-vt-font() \n\
     Ctrl <Key> 0: set-vt-font(d)
