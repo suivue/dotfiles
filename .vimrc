@@ -52,7 +52,7 @@ nnoremap <F5> :w<CR>:!clear; python3 %<CR>
 
 "One for java (not tested)
 "nnoremap rj :!clear; javac -d . % && java -cp $CLASSPATH %<CR>
-nnoremap rj :!clear; javac -d . % && java %<CR>
+"nnoremap rj :!clear; javac -d . % && java %<CR>
 
 "One for rust (not tested)
 nnoremap rr :w<CR>:!clear && rustc %<CR>
@@ -82,10 +82,11 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'rust-lang/rust.vim'
 Plug 'davidhalter/jedi-vim'
-"Plug 'dense-analysis/ale'
-"Plug 'nvie/vim-flake8'
-"Colorscheme
+"Plug 'ycm-core/YouCompleteMe'
 Plug 'junegunn/seoul256.vim'
+Plug 'dense-analysis/ale'
+Plug 'nvie/vim-flake8'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
