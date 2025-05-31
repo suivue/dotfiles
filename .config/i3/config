@@ -89,12 +89,14 @@ for_window [class="feh"] floating enable, border pixel 1
 # Enable web camera support and make it float and sticky (available on all
 # workspaces)
 for_window [title="video0 - mpv"] floating enable, sticky enable
+for_window [class="Virt-manager"] floating enable
 
 # assign and for_window both can be used to make window open in a specific
 # workspace. Still need to understand their differences :p
 assign [class="firefox"] 2
 assign [class="librewolf"] 9
 assign [class="mpv"] 8
+assign [class="Virt-manager"] 3
 
 # prevent focus changing to new window
 no_focus [window_role="pop-up"]
