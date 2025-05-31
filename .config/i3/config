@@ -28,7 +28,7 @@ set $mod2 Mod4
 #font pango:DejaVu Sans Mono 8
 #font pango:Cascadia Code 9
 # A font list is supported. Last one gets the priority!
-font pango:Adwaita Mono 9, JetBrains Mono 9, Cascadia Code 9, Fira Code 9
+font pango:Adwaita Mono 9, JetBrains Mono 9, Fira Code 9, Cascadia Code 9
 
 # Window title alignment; default is left
 title_align center
@@ -320,6 +320,6 @@ bar {
                 binding_mode       #FF5555 #FF5555 #F8F8F2
         }
         # padding similar to css. does not affect the font size
-        #padding 2px 0px
-        padding 8px 10px
+        padding 2px 0px
+        #padding 8px 10px
 }
