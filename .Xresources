@@ -99,15 +99,23 @@ URxvt.geometry: 400x400
 !!1) Arch wiki
 !!2) http://www.futurile.net/2016/06/14/xterm-setup-and-truetype-font-\
 !!                                                                configuration
-UXTerm.vt100.translations: #override \n\
+*VT100.translations: #override \n\
     Ctrl <Key> plus: larger-vt-font() \n\
     Ctrl <Key> minus: smaller-vt-font() \n\
-    Ctrl <Key> 0: set-vt-font(d)
-    Shift <Keypress> Insert: insert-selection(CLIPBOARD) \n\
+    Ctrl <Key> 0: set-vt-font(d) \n\
+    Shift <Key> Insert: insert-selection(CLIPBOARD) \n\
     Ctrl Shift <Key> C: copy-selection(CLIPBOARD) \n\
     Ctrl Shift <Key> V: insert-selection(CLIPBOARD)
 !!    Ctrl <Btn1Up>: exec-formatted("xdg-open '%t'", PRIMARY)
 
+! Initially copy-paste was not working with above settings.
+! It seems <Keypress> in
+!       "Shift <Keypress> Insert: insert-selection(CLIPBOARD) \n\"
+! was causing the problem. By chance, I saw the following warning on one
+! of the setup and after changing <Keypress> to <Key> copy-paste works.
+!Warning: translation table syntax error: Unknown event type :   Keypress
+!Warning: ... found while parsing 'Shift <Keypress> Insert: insert-selection(CLIPBOARD) '
+!Warning: String to TranslationTable conversion encountered errors!
 
 !!Colors
 !!Bare minimum
