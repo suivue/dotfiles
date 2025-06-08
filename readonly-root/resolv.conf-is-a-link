@@ -1,0 +1,1 @@
+lrwxrwxrwx 1 root root 31 Jun 18 12:15 /etc/resolv.conf -> /run/NetworkManager/resolv.conf

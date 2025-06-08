@@ -1,0 +1,22 @@
+NAME                    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda                       8:0    0 596.2G  0 disk 
+|-sda1                    8:1    0     1G  0 part 
+|-sda2                    8:2    0     1G  0 part 
+|-sda3                    8:3    0    48G  0 part 
+|-sda4                    8:4    0   250G  0 part /data/share
+|-sda5                    8:5    0     1G  0 part /boot/efi
+|-sda6                    8:6    0     8G  0 part [SWAP]
+|-sda7                    8:7    0    50G  0 part 
+| |-debian-root         254:3    0    20G  0 lvm  
+| |-debian-altroot      254:4    0     5G  0 lvm  
+| `-debian-home         254:5    0    25G  0 lvm  
+|-sda8                    8:8    0    50G  0 part 
+`-sda9                    8:9    0    50G  0 part 
+  |-ro--debian-system   254:0    0    15G  0 lvm  /
+  |-ro--debian-recovery 254:1    0    10G  0 lvm  
+  `-ro--debian-data     254:2    0    25G  0 lvm  /var
+                                                  /root
+                                                  /opt
+                                                  /home
+                                                  /data
+sr0                      11:0    1  1024M  0 rom  

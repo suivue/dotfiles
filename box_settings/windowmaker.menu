@@ -1,0 +1,123 @@
+"openSUSE Menu" MENU
+ "Applications" MENU
+  "ARandR" EXEC arandr
+  "About Me" EXEC /usr/bin/mugshot
+  "Bluetooth Manager" EXEC blueman-manager
+  "Customize Look and Feel" EXEC lxappearance
+  "Desktop" EXEC pcmanfm-qt --desktop-pref=general
+  "Desktop Preferences" EXEC pcmanfm --desktop-pref
+  "File Manager Settings" EXEC thunar-settings
+  "IcedTea-Web Control Panel" EXEC /usr/bin/itweb-settings.itweb.sh
+  "IcedTea-Web Policy Editor" EXEC /usr/bin/policyeditor.itweb.sh
+  "Keyboard and Mouse" EXEC lxinput
+  "Monitor Settings" EXEC lxrandr
+  "Picom Configuration" EXEC picom-conf
+  "Power Manager" EXEC xfce4-power-manager-settings
+  "Removable Drives and Media" EXEC thunar-volman-settings
+  "Restore Panel Defaults" EXEC xfce4-panel-restore-defaults
+  "Tint2 Settings" EXEC tint2conf
+  "XScreenSaver" EXEC xscreensaver
+  "XScreenSaver Settings" EXEC xscreensaver-settings
+  "Xfce Terminal Settings" EXEC xfce4-terminal --preferences
+ "Applications" END
+ "Development" MENU
+  "GTK Demo" EXEC gtk4-demo
+  "Geany" EXEC geany 
+  "Git Gui" EXEC git gui
+  "Icon Browser" EXEC gtk4-icon-browser
+  "Node Editor" EXEC gtk4-node-editor
+  "Print Editor" EXEC gtk4-print-editor 
+  "Widget Factory" EXEC gtk4-widget-factory
+ "Development" END
+ "Education" MENU
+  "LibreOffice Math" EXEC libreoffice --math 
+ "Education" END
+ "Graphics" MENU
+  "Color Chooser" EXEC gcolor2
+  "Document Scanner" EXEC simple-scan
+  "GIMP" EXEC gimp-2.10 
+  "LXImage-Qt" EXEC lximage-qt 
+  "LibreOffice Draw" EXEC libreoffice --draw 
+  "Mupdf-GL" EXEC mupdf-gl 
+  "Ristretto Image Viewer" EXEC ristretto 
+  "ScreenGrab" EXEC screengrab
+  "Viewnior" EXEC viewnior 
+  "mtPaint" EXEC mtpaint 
+ "Graphics" END
+ "Internet" MENU
+  "Claws Mail" EXEC claws-mail 
+  "Dillo" EXEC dillo 
+  "Firefox" EXEC firefox 
+  "HexChat" EXEC hexchat --existing 
+  "Pidgin" EXEC pidgin
+  "TigerVNC Viewer" EXEC /usr/bin/vncviewer-tigervnc
+  "uGet" EXEC env GDK_BACKEND=x11 uget-gtk 
+ "Internet" END
+ "Multimedia" MENU
+  "Brasero" EXEC brasero 
+  "Cheese" EXEC cheese
+  "Parole Media Player" EXEC parole 
+  "PulseAudio Volume Control" EXEC pavucontrol
+  "PulseAudio Volume Control" EXEC pavucontrol-qt
+  "Videos" EXEC totem 
+ "Multimedia" END
+ "Office" MENU
+  "AbiWord" EXEC abiword 
+  "Atril Document Viewer" EXEC atril 
+  "Dictionary" EXEC xfce4-dict
+  "Gnumeric" EXEC gnumeric 
+  "LibreOffice" EXEC libreoffice 
+  "LibreOffice Base" EXEC libreoffice --base 
+  "LibreOffice Calc" EXEC libreoffice --calc 
+  "LibreOffice Draw" EXEC libreoffice --draw 
+  "LibreOffice Impress" EXEC libreoffice --impress 
+  "LibreOffice Math" EXEC libreoffice --math 
+  "LibreOffice Writer" EXEC libreoffice --writer 
+ "Office" END
+ "Science" MENU
+  "Gnumeric" EXEC gnumeric 
+  "LibreOffice Math" EXEC libreoffice --math 
+ "Science" END
+ "System" MENU
+  "Advanced Network Configuration" EXEC nm-connection-editor
+  "Ark" EXEC ark 
+  "Bulk Rename" EXEC thunar --bulk-rename 
+  "Crashed Processes Viewer" EXEC drkonqi-coredump-gui
+  "File Manager PCManFM" EXEC pcmanfm 
+  "Htop" EXEC xterm -e htop
+  "LXTerminal" EXEC lxterminal
+  "LightDM GTK+ Greeter settings" EXEC lightdm-gtk-greeter-settings-pkexec
+  "Midnight Commander" EXEC xterm -e mc
+  "Print Settings" EXEC system-config-printer
+  "QTerminal" EXEC qterminal
+  "QTerminal drop down" EXEC qterminal --drop
+  "Task Manager" EXEC lxtask
+  "Task Manager" EXEC xfce4-taskmanager
+  "Thunar File Manager" EXEC thunar 
+  "Welcome" EXEC /usr/bin/opensuse-welcome
+  "XTerm" EXEC xterm
+  "Xfce Terminal" EXEC xfce4-terminal
+  "YaST" EXEC /usr/bin/xdg-su -c /sbin/yast2
+  "YaST Software" EXEC /usr/lib/YaST2/bin/sw_single_wrapper 
+  "conky" EXEC conky --daemonize --pause=1
+ "System" END
+ "Utilities" MENU
+  "Application Finder" EXEC xfce4-appfinder
+  "Ark" EXEC ark 
+  "Bulk Rename" EXEC thunar --bulk-rename 
+  "Catfish File Search" EXEC catfish
+  "FeatherPad" EXEC featherpad 
+  "File Manager PCManFM" EXEC pcmanfm 
+  "GNOME Character Map" EXEC gucharmap
+  "Galculator" EXEC galculator
+  "LXQt File Archiver" EXEC lxqt-archiver 
+  "Leafpad" EXEC leafpad 
+  "LightDM GTK+ Greeter settings" EXEC lightdm-gtk-greeter-settings-pkexec
+  "Openbox Configuration Manager" EXEC obconf 
+  "PCManFM-Qt File Manager" EXEC pcmanfm-qt 
+  "Passwords and Keys" EXEC seahorse 
+  "Screenshot" EXEC xfce4-screenshooter
+  "Thunar File Manager" EXEC thunar 
+  "picom" EXEC picom
+ "Utilities" END
+"openSUSE Menu" END

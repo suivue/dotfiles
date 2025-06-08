@@ -1,0 +1,15 @@
+# read-only root; stateless root
+/dev/mapper/ro--debian-system  /  ext4  defaults,ro  0 1
+UUID=FADE-94BB  /boot/efi  vfat  umask=0077  0 1
+/dev/sda6  none  swap  sw  0 0
+UUID=1e685d36-3a23-423b-9e21-7481a07eb670  /data/share  ext4  user,exec  0 1
+
+# non-volatile stateful partitions
+/dev/mapper/ro--debian-data  /data  ext4  defaults  0 0
+#/data/etc  /etc  none  defaults,bind  0 0
+/data/home  /home  none  defaults,bind  0 0
+/data/opt  /opt  none  defaults,bind  0 0
+/data/root  /root  none  defaults,bind  0 0
+/data/var  /var  none  defaults,bind  0 0
+tmpfs  /tmp  tmpfs  rw,nodev,nosuid,size=2G  0 0
+

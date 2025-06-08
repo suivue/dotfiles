@@ -1,0 +1,158 @@
+# twmrc file copied from /usr/local/share/X11/twm/system.twmrc
+#
+#
+###################
+# Variables Section
+###################
+#
+#AutoRaise
+NoGrabServer
+RestartPreviousState
+DecorateTransients
+DontMoveOff # Enforces screen edge borders
+NoMenuShadows # No shadow behind the menu
+RandomPlacement
+# Show window contents when moving the window
+OpaqueMove
+# Show icon manager on the desktop. It's size and location
+# are defined in .Xresources
+#ShowIconManager
+#IconManagerGeometry "1360x24-3-24" 10 
+#"h" = m | c : all : f.lefticonmgr
+#"j" = m | c : all : f.downiconmgr
+#"k" = m | c : all : f.upiconmgr
+#"l" = m | c : all : f.righticonmgr
+
+# Applications without title bar
+NoTitle { "xclock" "tint2" "showiconmgr" }
+
+# Fonts
+##TitleFont "-*-dejavu sans-bold-r-normal--*-120-*-*-*-*-*-*"
+##TitleFont "9x15"
+##TitleFont "Xft:sans-10:bold" # Truetype does not work :-(
+TitleFont "-*-helvetica-bold-r-normal--*-100-*-*-*-*-*-1"
+ResizeFont "-*-helvetica-bold-r-normal--*-100-*-*-*-*-*-1"
+MenuFont "-*-helvetica-medium-r-normal--*-100-*-*-*-*-*-1"
+IconFont "-*-helvetica-medium-r-normal--*-100-*-*-*-*-*-1"
+IconManagerFont "-*-helvetica-medium-r-normal--*-100-*-*-*-*-*-1"
+#ClientBorderWidth
+
+# Add buttons to window's titlebar
+# For this first we have to remove the defaults including
+# the highlighting effect
+NoDefaults
+NoTitleHighlight
+TitleButtonBorderWidth 0
+#SqueezeTitle	# allows titlebar to occupy as much space as needed.
+# Add our buttons. Ordered from left to right
+LeftTitleButton "/home/sv/.config/twm/bitmaps/resize.xbm" = f.resize
+RightTitleButton "/home/sv/.config/twm/bitmaps/minimize.xbm" = f.iconify
+RightTitleButton "/home/sv/.config/twm/bitmaps/maximize.xbm" = f.fullzoom
+RightTitleButton "/home/sv/.config/twm/bitmaps/close.xbm" = f.delete
+
+Color
+{
+    #BorderColor "rgb:2/a/9" #default twm color
+    BorderColor "firebrick"
+    DefaultBackground "white"
+    DefaultForeground "black"
+
+    TitleBackground "firebrick"
+    TitleForeground "white"
+
+    MenuTitleBackground "firebrick"
+    MenuTitleForeground "white"
+
+    MenuBackground "#ffffff"
+    MenuForeground "#303639"
+    MenuBorderColor "#303639"
+
+    IconBackground "rgb:2/a/9"
+    IconForeground "gray85"
+    IconBorderColor "gray85"
+
+    IconManagerBackground "rgb:2/a/9"
+    IconManagerForeground "rgb:0/0/0"
+}
+
+
+##################
+# Bindings Section
+##################
+# Define some useful functions for motion-based actions.
+#
+MoveDelta 3
+Function "move-or-lower" { f.move f.deltastop f.lower }
+Function "move-or-raise" { f.move f.deltastop f.raise }
+Function "move-or-iconify" { f.move f.deltastop f.iconify }
+
+#
+# Set some useful bindings.  Sort of uwm-ish, sort of simple-button-ish
+#
+Button1 = : root : f.menu "defops"
+"F1"	= m : all : f.menu "defops"
+Button3 = : root : f.menu "custom"
+
+Button1 = m : window|icon : f.function "move-or-lower"
+Button2 = m : window|icon : f.iconify
+Button3 = m : window|icon : f.function "move-or-raise"
+
+Button1 = : title : f.function "move-or-raise"
+Button2 = : title : f.raiselower
+
+Button1 = : icon : f.function "move-or-iconify"
+Button2 = : icon : f.iconify
+
+Button1 = : iconmgr : f.iconify
+Button2 = : iconmgr : f.iconify
+
+# Emulate Alt+Tab switching. Limited to items defined in the 
+# WindowRing as shown below
+#WindowRing { "xterm" "firefox" }
+#"Tab" = m : all : f.warpring "next"
+#"Tab" = m | s : all : f.warpring "previous"
+Function "winup" { f.circleup }
+"Tab" = m : all : f.function "winup"
+###############
+# Menus Section
+###############
+#
+menu "defops"
+{
+"Twm"	f.title
+"Iconify"	f.iconify
+"Resize"	f.resize
+"Move"		f.move
+"Raise"		f.raise
+"Lower"		f.lower
+""		f.nop
+"Focus"		f.focus
+"Unfocus"	f.unfocus
+"Show Iconmgr"	f.showiconmgr
+"Hide Iconmgr"	f.hideiconmgr
+""		f.nop
+"Xterm"		f.exec "exec xterm &"
+""		f.nop
+"Kill"		f.destroy
+"Delete"	f.delete
+""		f.nop
+"Restart"	f.restart
+"Exit"		f.quit
+}
+
+menu "custom"
+{
+"Applications"	f.title
+""		f.nop
+"Xterm"		f.exec "exec xterm &"
+"Internet"	f.menu "Net"
+""		f.nop
+"Restart"	f.restart
+}
+
+menu "Net"
+{
+"Firefox"	f.exec "exec firefox &"
+"Links"		f.exec "exec links -g &"
+}
+

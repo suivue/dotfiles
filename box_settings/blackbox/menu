@@ -1,0 +1,157 @@
+# This is the default menu file for Blackbox 0.33.0 and up
+#
+# Lines beginning with the '#' character are ignored.
+#
+# The new syntax is simpler than the old X resource format...
+# Each menu item consists of 2 or 3 fields:
+#
+#       [command]  (label)  {data}
+#
+# where [command] is one of:
+#
+#   [begin] [end] [exec] [exit] [reconfig] [restart] [submenu]
+#   [style] [stylesdir] [include] [workspaces] [config]
+#
+# [begin] is used for the top level menu
+# [submenu] is used for submenus
+# [end] must be used with BOTH [begin] and [submenu] to tell the parser to stop
+#   reading from the file.
+#
+# [exec] (label) {string}
+# This will insert an item that runs a program.
+#
+# [exit] (label)
+# This will insert an item that exits the window manager.
+#
+# [reconfig] (label) {string}
+# This will insert an item that tells blackbox to re-read it's configuration
+#  files.  {string} is optional, and if supplied, will execute the string with
+#  /bin/sh -c before the reconfiguration is performed.  (this is helpful for
+#  writing multiple config files and switching between them)
+#
+# [restart] (label) {string}
+# This will insert an item to restart the window manager.  {string} is
+# optional, and if omitted, blackbox will restart itself.  If {string} is
+# specified, then a different window manager will be started.
+#
+# [style] (filename)
+# This will insert an item to reconfigure blackbox with the new style. This
+# change is saved when blackbox exits or restarts.
+#
+# [include] (filename)
+# This will read more menu items from the file "filename".  The file cannot
+# contain a [begin] or [end], except for the [end] needed for submenus.
+#
+# [workspaces] (label)
+# This tells Blackbox to insert a "link" to the workspaces menu directly
+# into your menu.
+#
+# [config] (label)
+# This tells Blackbox to insert the ConfigMenu into your menu.  The ConfigMenu
+# allows you to change several options found in your ~/.blackboxrc file on the
+# fly.
+#
+# example:
+
+[begin] (Blackbox)
+[encoding] {UTF-8}
+      [exec] (URxvt) {urxvt} 
+      [exec] (Firefox) {firefox} 
+      [exec] (Run) {fbrun} 
+[submenu] (Accessories)
+      [exec]   (Xterm) {xterm} 
+      [exec]   (Urxvt) {urxvt} 
+      [exec]   (Xedit) {xedit} 
+      [exec]   (Kwrite) {kwrite} 
+      [exec]   (Kate) {kate} 
+      [exec]   (Mc) {urxvt -e mc} 
+[submenu] (X-utils)
+      [exec]   (Xfontsel) {xfontsel} 
+      [exec]   (Xman) {xman} 
+      [exec]   (Xload) {xload} 
+      [exec]   (Xbiff) {xbiff} 
+      [exec]   (Editres) {editres} 
+      [exec]   (Viewres) {viewres} 
+      [exec]   (Xclock) {xclock} 
+      [exec]   (Xmag) {xmag} 
+      [exec]   (Wmagnify) {wmagnify} 
+      [exec]   (Gkrellm) {gkrellm} 
+      [exec] (Reload .Xresources) {xrdb -load $HOME/.Xresources}
+[end]
+[end]
+[submenu] (Games)
+      [exec]   (Eboard) {eboard} 
+      [exec]   (Eboard) {xboard} 
+      [exec]   (Xsnow) {xsnow} 
+      [exec]   (Xeyes) {xeyes} 
+[end]
+[submenu] (Graphics)
+      [exec]   (Gimp) {gimp} 
+      [exec]   (Xv) {xv} 
+      [exec]   (Xpaint) {xpaint} 
+      [exec]   (Xscreensaver-demo) {xscreensaver-demo} 
+      [exec]   (Xlock) {xlock} 
+      [exec]   (Krita) {krita} 
+      [exec] (Mesa gears) {gears} 
+[end]
+[submenu] (Internet)
+      [exec]   (Firefox) {firefox} 
+      [exec]   (Links-graphic) {links -driver x slackware.com}
+      [exec]   (Links) {urxvt -e links slackware.com}
+      [exec]   (Irssi) {urxvt -e irssi} 
+      [exec]   (Mutt) {urxvt -e mutt} 
+      [exec]   (Kopete) {kopete} 
+      [exec]   (Thunderbird) {thunderbird} 
+      [exec]   (Pan) {pan} 
+      [exec]   (Slrn) {urxvt -e slrn} 
+      [exec]   (Tin) {urxvt -e tin} 
+      [exec]   (Gftp) {gftp} </usr/share/gftp/gftp.xpm>
+      [exec]   (Lftp) {urxvt -e lftp} 
+[end]
+[submenu] (Office)
+      [exec]   (Document) {xterm} 
+      [exec]   (Presentation) {urxvt} 
+      [exec]   (Spreadsheet) {urxvtc} 
+      [exec]   (PDF Viewer) {xpdf} 
+      [exec]   (Calendar) {orage} 
+      [exec]   (Xclock) {xclock} 
+      [exec]   (Xcalc) {xcalc} 
+      [exec]   (Kcalc) {kcalc} 
+      [exec]   (Gv) {gv} 
+      [exec]   (Xfig) {xfig} 
+[end]
+[submenu] (Multimedia)
+      [exec]   (Audacious) {audacious} 
+      [exec]   (Alsamixer) {urxvt -e alsamixer} 
+      [exec]   (VLC) {urxvt} 
+[end]
+[submenu] (System Tools)
+      [exec]   (K3b) {k3b} 
+      [exec]   (Top) {urxvt -e top} 
+      [exec]   (Htop) {urxvt -e htop} 
+[end]
+[submenu] (Blackbox Menu)
+      [config] (Configure) 
+[submenu] (System Styles) {Choose a style...}
+      [stylesdir] (/usr/share/blackbox/styles) 
+[end]
+[submenu] (User Styles) {Choose a style...}
+      [stylesdir] (~/.blackbox/styles) 
+[end]
+      [workspaces] (Workspace List) 
+[submenu] (Tools)
+      [exec] (Window name) {xprop WM_CLASS|cut -d \" -f 2|xmessage -file - -center} 
+      [exec] (Screenshot - JPG) {import screenshot.jpg && display -resize 50% screenshot.jpg} 
+      [exec] (Screenshot - PNG) {import screenshot.png && display -resize 50% screenshot.png} 
+      [exec] (Run) {fbrun} 
+[end]
+      [exec] (Lock screen) {xlock} 
+      [commanddialog] (blackbox Command) 
+      [reconfig] (Reload config) 
+      [restart] (Restart) 
+      [exec] (About) {blackbox -v | xmessage -file - -center} 
+      [separator] 
+      [exit] (Exit) 
+[end]
+[endencoding]
+[end]
