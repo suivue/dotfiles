@@ -1,0 +1,1056 @@
+# .twmrc - twm startup file
+# Steve Kinzler, kinzler@cs.indiana.edu, Apr 96/Apr 98
+# http://www.cs.indiana.edu/~kinzler/home.html#x11
+
+## TWM ## Colors & Fonts ######################################################
+
+SaveColor {
+# Standard Colorset
+	"black" "dark slate grey" "slate grey" "grey" "gainsboro" "white"
+	"navy" "blue" "dodger blue" "sky blue" "lavender"
+	"sea green" "lime green" "green" "pale green"
+	"violet" "magenta" "purple"
+	"cyan"
+	"sienna" "peru" "orange" "gold"
+	"yellow" "tan" "wheat" "lemon chiffon"
+	"firebrick" "red" "tomato"
+# Standard Greyset
+	"grey7"  "grey13" "grey20" "grey27" "grey33" "grey40" "grey47"
+	"grey53" "grey60" "grey67" "grey73" "grey80" "grey87" "grey93"
+# Non-standard Color
+	"beige"
+}
+
+Color {
+	BorderColor		"blue"
+	BorderTileBackground	"grey"
+	BorderTileForeground	"grey"
+	DefaultBackground	"yellow"
+	IconBackground		"green"
+	IconManagerBackground	"black"
+	IconManagerForeground	"green"
+	IconManagerHighlight	"blue"
+	MenuBackground		"red"
+	MenuForeground		"white"
+	MenuTitleBackground	"blue"
+	MenuTitleForeground	"white"
+	TitleBackground		"blue"
+	TitleForeground		"white"
+}
+
+#TitleFont	"-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+#MenuFont	"-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+#IconManagerFont"-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+#IconFont	"-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
+TitleFont	"9x15bold"	# for guaranteed pixel sizes
+MenuFont	"7x13bold"
+IconManagerFont	"7x13bold"
+#IconFont	"6x12"
+IconFont	"*-helvetica-medium-r-*-*-*-80-*"
+
+## TWM ## Variables & Icon Mangement ##########################################
+
+BorderWidth		4
+ConstrainedMoveTime	200
+DontMoveOff
+MoveDelta		3
+NoDefaults
+RandomPlacement
+RestartPreviousState
+SqueezeTitle
+UsePPosition		"on"
+WarpUnmapped
+
+ShowIconManager
+IconManagerGeometry	"130+0+22"
+SortIconManager
+NoCaseSensitive
+IconManagerDontShow
+IconManagerShow		{ "XTerm" }
+IconifyByUnmapping	{ "XTerm" }
+
+#IconRegion		"215x221+140-262" West North 1 1
+ForceIcons
+IconDirectory		"~/etc/img"
+UnknownIcon		"unknown.xbm"
+Icons			{ "kinzler"	"windows.xbm"
+			  "kinzler2"	"windows.xbm"
+			  "Wfica"	"windows.xbm" }
+
+NoTitle	{
+	"TWM Icon Manager" "dclock" "panel_window" "gnome-panel" "xcb-placed"
+	"xeyes-placed" "xfaces" "XLoad" "xmter" "xtherm-placed"
+	"xosview-dflt" "xosview-local" "xosview-local-third" "xosview-other"
+}
+
+## TWM ## Functions & Buttons #################################################
+
+DefaultFunction			f.beep
+Function "ResizeIconify"	{ f.resize    f.deltastop f.iconify    }
+Function "MoveRaiselower"	{ f.move      f.deltastop f.raiselower }
+Function "ForcemoveRaiselower"	{ f.forcemove f.deltastop f.raiselower }
+
+Function "ZoomWarp"		{ f.zoom       !"warptotitle" }
+Function "HoriZoomWarp"		{ f.horizoom   !"warptotitle" }
+Function "LeftZoomWarp"		{ f.leftzoom   !"warptotitle" }
+Function "RightZoomWarp"	{ f.rightzoom  !"warptotitle" }
+Function "TopZoomWarp"		{ f.topzoom    !"warptotitle" }
+Function "BottomZoomWarp"	{ f.bottomzoom !"warptotitle" }
+Function "FullZoomWarp"		{ f.fullzoom   !"warptotitle" }
+
+LeftTitleButton  "menu.xbm"	= f.menu "WindowOps"
+RightTitleButton "fullzoom.xbm"	= f.function "FullZoomWarp"
+RightTitleButton "zoom.xbm"	= f.function "ZoomWarp"
+RightTitleButton "delete.xbm"	= f.delete
+
+Button1 =   : r		    : f.menu "RootOps"
+Button1 = s : r		    : f.menu "WindowOps"
+Button1 = c : r		    : f.menu "TwmWindows"
+Button1 = m : r		    : f.menu "BasicWindowOps"
+Button2 =   : r		    : f.menu "Clients"
+Button2 = s : r		    : f.menu "Standard"
+Button2 = c : r		    : f.menu "Multimedia"
+Button2 = m : r		    : f.menu "X Tools"
+Button3 =   : r		    : f.menu "Hosts"
+Button3 = s : r		    : f.menu "MyHosts"
+Button3 = c : r		    : f.menu "Hostlists"
+Button3 = m : r		    : f.menu "Hostlist unix"
+
+Button1 =   : t | f         : f.function "ResizeIconify"
+Button1 =   :         i | m : f.iconify
+Button1 = s : t | f | i | m : f.winrefresh
+Button1 = c : t | f | i | m : f.autoraise
+Button1 = m : t | f | i | m : f.identify
+Button2 =   : t | f | i | m : f.delete
+Button2 = s : t | f | i | m : f.destroy
+Button3 =   : t | f | i | m : f.function "MoveRaiselower"
+Button3 = s : t | f | i | m : f.function "ForcemoveRaiselower"
+
+## TWM ## Keys ################################################################
+
+"Help"	=   : all : !"xterm -T Help -e view +/Help ${TWMRC-HOME/.twmrc} &"
+"Pause" = s : all : !"xterm -T Help -e view +/Help ${TWMRC-HOME/.twmrc} &"
+
+"Up"	=   : r   : f.colormap "prev"
+"Down"	=   : r   : f.colormap "next"
+"Left"	= s : r   : f.warptoscreen "back"
+"Right"	= s : r   : f.warptoscreen "next"
+"Up"	= s : r   : f.warptoscreen "prev"
+"Down"	= s : r   : f.warptoscreen "prev"
+
+"Print"	=   : all : f.raiselower
+"Pause"	=   : all : f.iconify
+
+"F12"	=   : all : !"xcb -s 0-4 < /dev/null"
+"F11"	= s : all : !"xcb -r 1"
+"F12"	= s : all : !"xcb -r -1"
+"F11"	= c : all : f.forwiconmgr
+"F12"	= c : all : f.backiconmgr
+"F13"	=   : all : f.circledown
+"F14"	=   : all : f.circleup
+"F15"	=   : all : f.raiselower
+"F16"	=   : all : f.iconify
+"F17"	=   : all : f.autoraise
+"F18"	=   : all : f.identify
+"F19"	=   : all : f.function "ZoomWarp"
+"F20"	=   : all : f.function "HoriZoomWarp"
+"F20"	= s : all : f.function "FullZoomWarp"
+
+"F1"	= c : all : f.forwiconmgr
+"F2"	= c : all : f.backiconmgr
+"F3"	= c : all : f.circledown
+"F4"	= c : all : f.circleup
+"F5"	= c : all : f.raiselower
+"F6"	= c : all : f.iconify
+"F7"	= c : all : f.autoraise
+"F8"	= c : all : f.identify
+"F9"	= c : all : f.function "ZoomWarp"
+"F10"	= c : all : f.function "HoriZoomWarp"
+
+"F1"	=   : r   : !"screensaver random lock &"
+"F1"	= s : r   : !"screensaver blank lock &"
+"F2"	=   : r   : !"screensaver random &"
+"F2"	= s : r   : !"screensaver blank &"
+"F3"	=   : r   : f.circledown
+"F4"	=   : r   : f.circleup
+"F7"	=   : r   : f.autoraise
+"F8"	=   : r   : f.identify
+"F9"	=   : r   : f.function "ZoomWarp"
+"F10"	=   : r   : f.function "HoriZoomWarp"
+"F10"	= s : r   : f.function "FullZoomWarp"
+
+"Tab"	= c : all : !"cutbuf | inbrowse -w &"
+
+"5"	= c : all : f.menu "RootOps"
+"6"	= c : all : f.menu "Clients"
+"7"	= c : all : f.menu "Hosts"
+"0"	= c : all : f.delete
+"9"	= c : all : f.destroy
+
+"c"	= c : r   : !"clear_colormap"
+"l"	= c : r   : f.refresh
+"s"	= c : r   : f.restart
+"t"	= c : r   : f.twmrc
+"x"	= c : r   : !"exec xrdb ${XRESOURCES-HOME/.Xdefaults}"
+
+"3"	=   : r   : !"csh -c 'exec mxaudio ~/l/mp3/music' || exec csh -c 'exec xmms ~/l/mp3/music' &"
+"4"	=   : r   : !"streamtuner &"
+"a"	= s : r   : !"/usr/demo/SOUND/bin/soundtool &"
+"b"	= s : r   : !"/l/picons/bits/xb incoming &"
+"c"	= s : r   : !"xcb &"
+"d"	= s : r   : !"xcalc &"
+"e"	= s : r   : !"eject &"
+"f"	= s : r   : !"facemon -G xmail &"
+"g"	= s : r   : !"xgrab &"
+#h"	= s : r   : !""
+"i"	= s : r   : !"netscapewin &"
+#j"	= s : r   : !""
+"n"	= s : r   : !"nwn &"
+"o"	= s : r   : !"soffice -xrm 'ctwm.workspace: Four' &"
+"p"	= s : r   : !"xterm -title PPP -e ppp &"
+"q"	= s : r   : !"xterm -e micq &"
+#r"	= s : r   : !""
+#s"	= s : r   : !""
+"t"	= s : r   : !"tora &"
+"u"	= s : r   : !"xman &"
+"v"	= s : r   : !"skype &"
+"w"	= s : r   : !"grip || xmcd || exec xplaycd &"
+"x"	= s : r   : !"xv &"
+"y"	= s : r   : !"xterm -e gmplayer &"
+"z"	= s : r   : !"xmag &"
+
+"a"	=   : r   : !"xt -N alamode $AH &"
+"b"	=   : r   : !"xt -N alembic $BH &"
+"c"	=   : r   : !"xt -C -name xterm-console &"
+#d"	=   : r   : !""
+#e"	=   : r   : !""
+"f"	=   : r   : !"xt -N alamoff $FH &"
+"g"	=   : r   : !"xt grouchy &"
+"h"	=   : r   : !"xt -N login -ssh $LH &"
+#i"	=   : r   : !""
+#j"	=   : r   : !""
+"k"	= c : r   : !"xt -name xterm-main -N kinzler ':hosts ppp' &"
+"k"	= s : r   : !"xt -name xterm-MAIN -N KINZLER ':hosts ppp' &"
+"k"	=   : r   : !"xt -N kinzler ':hosts ppp' &"
+"l"	= s : r   : !"xt -name xterm-MAIN -N LOCAL &"
+"l"	=   : r   : !"xt -name xterm-local &"
+"m"	= s : r   : !"xt -name xterm-MAIN -N $MAILHTIT $MAILHOST &"
+"m"	=   : r   : !"xt -name xterm-main -N $MAILHtit $MAILHOST &"
+"n"	=   : r   : !"xt megamouth &"
+"o"	=   : r   : !"xt moose &"
+"p"	=   : r   : !"xt paca &"
+#q"	=   : r   : !""
+"r"	=   : r   : !"xt -N carelink -ssh $CH &"
+"s"	=   : r   : !"xt -N swank $SH &"
+"t"	=   : r   : !"xt -N transit $TH &"
+"u"	=   : r   : !"xt mutt &"
+#v"	=   : r   : !""
+"w"	=   : r   : !"xt whale &"
+#x"	=   : r   : !""
+"y"	=   : r   : !"xt -N trendy $YH &"
+"z"	=   : r   : !"xt aludel &"
+
+Function "WarpToHelp"	   { f.warpto "Help"	    !"warptotitle" }
+Function "WarpToConsole"   { f.warpto "console"	    !"warptotitle" }
+Function "WarpToLocal"	   { f.warpto "xterm-local" !"warptotitle" }
+Function "WarpToMain"	   { f.warpto "xterm-main"  !"warptotitle" }
+Function "WarpToAlamode"   { f.warpto "alamode"	    !"warptotitle" }
+Function "WarpToAlembic"   { f.warpto "alembic"	    !"warptotitle" }
+Function "WarpToAlamoff"   { f.warpto "alamoff"     !"warptotitle" }
+Function "WarpToCarelink"  { f.warpto "carelink"    !"warptotitle" }
+Function "WarpToGrouchy"   { f.warpto "grouchy"	    !"warptotitle" }
+Function "WarpToLogin"	   { f.warpto "login"	    !"warptotitle" }
+Function "WarpToKinzler"   { f.warpto "kinzler"     !"warptotitle" }
+Function "WarpToLOCAL"	   { f.warpto "LOCAL"	    !"warptotitle" }
+Function "WarpToMAIN"	   { f.warpto "ALEMBIC"	    !"warptotitle" }
+Function "WarpToMegamouth" { f.warpto "megamouth"   !"warptotitle" }
+Function "WarpToMoose"	   { f.warpto "moose"	    !"warptotitle" }
+Function "WarpToPaca"	   { f.warpto "paca"	    !"warptotitle" }
+Function "WarpToMicq"	   { f.warpto "micq"	    !"warptotitle" }
+Function "WarpToSwank"	   { f.warpto "swank"	    !"warptotitle" }
+Function "WarpToTransit"   { f.warpto "transit"	    !"warptotitle" }
+Function "WarpToTrendy"    { f.warpto "trendy"	    !"warptotitle" }
+Function "WarpToVi"	   { f.warpto "vi"	    !"warptotitle" }
+Function "WarpToXPlaycd"   { f.warpto "XPlaycd"	    !"warptotitle" }
+Function "WarpToXv"	   { f.warpto "XVroot"	    !"warptotitle" }
+Function "WarpToAludel"	   { f.warpto "aludel"	    !"warptotitle" }
+Function "WarpToComma"	   { f.warpto ",) "	    !"warptotitle" }
+Function "WarpToSemicolon" { f.warpto ";) "	    !"warptotitle" }
+
+"Help"	= m : r   : f.function "WarpToHelp"
+"Pause"	= m : r   : f.function "WarpToHelp"
+
+"0"	= m : r   : f.function "WarpToConsole"
+"1"	= m : r   : f.warpto   "xcb-placed"
+"2"	= m : r   : f.warpto   "xosview-local-third"
+"3"	= m : r   : f.warpto   "xosview-dflt"
+"4"	= m : r   : f.warpto   "xosview-other"
+"5"	= m : r   : f.warpto   "xfaces"
+"6"	= m : r   : f.warptoiconmgr ""
+"8"	= m : r   : f.function "WarpToLocal"
+"9"	= m : r   : f.function "WarpToMain"
+
+"a"	= m : r   : f.function "WarpToAlamode"
+"b"	= m : r   : f.function "WarptoAlembic"
+"c"	= m : r   : f.warpto   "xcb"
+#d"
+#e"
+"f"	= m : r   : f.function "WarpToAlamoff"
+"g"	= m : r   : f.function "WarpToGrouchy"
+"h"	= m : r   : f.function "WarpToLogin"
+#i"	= m : r   : f.warpto   "Mozilla"
+"i"	= m : r   : f.warpto   "Gecko"
+"j"	= m : r   : f.warpto   "Steve Kinzler - Work Page"
+"k"	= m : r   : f.function "WarpToKinzler"
+"l"	= m : r   : f.function "WarpToLOCAL"
+"m"	= m : r   : f.function "WarpToMAIN"
+"n"	= m : r   : f.function "WarpToMegamouth"
+"o"	= m : r   : f.function "WarpToMoose"
+"p"	= m : r   : f.function "WarpToPaca"
+"q"	= m : r   : f.function "WarpToMicq"
+"r"	= m : r   : f.function "WarpToCarelink"
+"s"	= m : r   : f.function "WarpToSwank"
+"t"	= m : r   : f.function "WarpToTransit"
+"u"	= m : r   : f.warpto   "xbmbrowser"
+"v"	= m : r   : f.function "WarpToVi"
+"w"	= m : r   : f.function "WarpToXPlaycd"
+"x"	= m : r   : f.function "WarpToXv"
+"y"	= m : r   : f.function "WarpToTrendy"
+"z"	= m : r   : f.function "WarpToAludel"
+
+"comma"		= m : r   : f.function "WarpToComma"
+"semicolon"	= m : r   : f.function "WarpToSemicolon"
+
+## TWM ## Operation Menus #####################################################
+
+menu "RootOps" {
+	"Root Ops"			f.title
+	"a. Clear Colormap (^C)"	!"clear_colormap"
+	"b. Refresh (^L)"		f.refresh
+	"c. Reread twmrc (^T)"		f.twmrc
+	"d. Reread Xresources (^X)"	!"exec xrdb ${XRESOURCES-HOME/.Xdefaults}"
+	"e. Restart (^S)"		f.restart
+	"f. Clear Buffers (f12)"	!"xcb -s 0-4 < /dev/null"
+	"g. Rotate Buffers Down (F11)"	!"xcb -r 1"
+	"h. Rotate Buffers Up (F12)"	!"xcb -r -1"
+	"i. Circle Down (f13,f3)"	f.circledown
+	"j. Circle Up (f14,f4)"		f.circleup
+	"k. Show Icon Manager"		f.showiconmgr
+	"l. Hide Icon Manager"		f.hideiconmgr
+	"m. Screen Lock (f1)"		!"screensaver random lock &"
+	"n. Screen Lock Blank (F1)"	!"screensaver blank lock &"
+	"o. Screen Save (f2)"		!"screensaver random &"
+	"p. Screen Save Blank (F2)"	!"screensaver blank &"
+	"q. Exit"			f.quit
+	"r. Window Ops"			("white":"blue") f.menu "WindowOps"
+	"s. TWM Windows"		("white":"blue") f.menu "TwmWindows"
+}
+
+menu "WindowOps" {
+	"Window Ops"			f.title
+	"a. Refresh"			f.winrefresh
+	"b. Autoraise (f17,f7)"		f.autoraise
+	"c. Identify (f18,f8)"		f.identify
+	"d. Focus"			f.focus
+	"e. Save"			f.saveyourself
+	"f. Zoom"			("white":"blue") f.menu "Zoom"
+	"g. Basic Ops"			("white":"blue") f.menu "BasicWindowOps"
+}
+
+menu "Zoom" {
+	"Zoom"				f.title
+	"a. Vertical (f19,f9)"		f.function "ZoomWarp"
+	"b. Horizontal (f20,f10)"	f.function "HoriZoomWarp"
+	"c. Left"			f.function "LeftZoomWarp"
+	"d. Right"			f.function "RightZoomWarp"
+	"e. Top"			f.function "TopZoomWarp"
+	"f. Bottom"			f.function "BottomZoomWarp"
+	"g. Full (F20,F10)"		f.function "FullZoomWarp"
+}
+
+menu "BasicWindowOps" {
+	"Basic Ops"			f.title
+	"a. Iconify (f16)"		f.iconify
+	"b. Resize"			f.resize
+	"c. Raise (f15)"		f.raise
+	"d. Lower (f15)"		f.lower
+	"e. Move"			f.move
+	"f. Forced Move"		f.forcemove
+	"g. Delete (^0)"		f.delete
+	"h. Destroy (^9)"		f.destroy
+}
+
+## TWM ## Client Menus ########################################################
+
+menu "Clients" {
+	"Clients"		f.title
+	"a. PPP (P)"		!"xterm -title PPP -e ppp &"
+	"b. Star Office (O)"	!"soffice -xrm 'ctwm.workspace: Four' &"
+	"c. Open Office"	!"ooffice &"
+	"d. Earth Clock"	!"xearth -once -proj merc &"
+	"e. Earth"		!"xearth -once &"
+	"f. Traceroute"		!"xtraceroute &"
+	"g. Temperature"	!"temp -x &"
+	"h. Osview"		!"xosview &"
+	"i. GKrellM"		!"gkrellm &"
+	"j. ICQ"		!"icq &"
+	"k. Calculator (D)"	!"xcalc &"
+	"l. Ghostview"		!"ghostview &"
+	"m. Azureus"		!"azureus &"
+	"n. Plucker"		!"plucker-desktop &"
+	"o. Tora (T)"		!"tora &"
+	"p. Consoles"		!"IPViewer &"
+	"q. At Jobs"		!"gat &"
+	"r. Standard"		("white":"blue") f.menu "Standard"
+	"s. Multimedia"		("white":"blue") f.menu "Multimedia"
+	"t. X Tools"		("white":"blue") f.menu "X Tools"
+	"u. Web"		("white":"blue") f.menu "Web"
+	"v. Documentation"	("white":"blue") f.menu "Documentation"
+	"w. Faces"		("white":"blue") f.menu "Faces"
+	"x. Eject"		("white":"blue") f.menu "Eject"
+	"y. Games"		("white":"blue") f.menu "Games"
+}
+
+menu "Standard" {
+	"Standard"		f.title
+	"a. Kitty"		!"kitty &"
+	"b. From (F)"		!"facemon -G xmail &"
+	"c. Cut Buffers"	!"xcb -name xcb-placed &"
+	"d. Clock"		!"dclock -date '%w, %d %m %y' &"
+	"e. Temperature"	!"temp -x -name xtherm-placed &"
+	"f. Load"		!"xload -name xload-local$XLOADM0 &"
+	"g. Load left"		!"xrsh ${XLOAD2-localhost} xload -name xload-other$XLOADM2 &"
+	"h. Load right"		!"xrsh ${XLOAD-localhost}  xload -name xload$XLOADM &"
+	"i. Osview"		!"xosview -name xosview-local$XOSVWM0 &"
+	"j. Osview left"	!"xrsh ${XLOAD2-localhost} xosview -name xosview-other &"
+	"k. Osview right"	!"xrsh ${XLOAD-localhost} xosview -name xosview-dflt &"
+	"l. Eyes small"		!"xeyes -name xeyes-placed &"
+	"m. Micq (Q)"		!"xterm -e micq &"
+	"n. Skype (V)"		!"skype &"
+	"o. Gnome Panel"	!"gnome-panel &"
+}
+
+menu "Multimedia" {
+	"Multimedia"		f.title
+	"a. Grab (G)"		!"xgrab &"
+	"b. Magnify (Z)"	!"xmag &"
+	"c. Xv (X)"		!"xv &"
+	"d. Display"		!"display &"
+	"e. Browser (B)"	!"/l/picons/bits/xb incoming &"
+	"f. Browser Incoming"	!"/l/picons/bin/xrxb grouchy incoming &"
+	"g. Bitmap"		!"bitmap &"
+	"h. Pixmap"		!"pixmap &"
+	"i. Paint"		!"xpaint &"
+	"j. Gimp"		!"gimp &"
+	"k. Xfig"		!"xfig &"
+	"l. Tgif"		!"tgif &"
+	"m. Scanner"		!"xsane &"
+	"n. Scanner & OCR"	!"kooka &"
+	"o. Scanner Panel"	!"xojpanel &"
+	"p. MPlayer (Y)"	!"xterm -e gmplayer &"
+	"q. VLC"		!"xterm -e vlc &"
+	"r. RealPlayer"		!"realplay || exec rvplayer &"
+	"s. Audiotool"		!"/usr/openwin/bin/audiotool &"
+	"t. Soundtool (A)"	!"/usr/demo/SOUND/bin/soundtool &"
+	"u. Xaudio (3)"		!"csh -c 'exec mxaudio ~/l/mp3/music' &"
+	"v. XMMS (3)"		!"csh -c 'exec xmms ~/l/mp3/music' &"
+	"w. Grip (W)"		!"grip &"
+	"x. Motif CD Player (W)"!"xmcd &"
+	"y. X CD Player (W)"	!"xplaycd &"
+	"z. Stream Tuner (4)"	!"streamtuner &"
+	"A. Synaesthesia"	!"/usr/games/xsynaesthesia cd &"
+}
+
+menu "X Tools" {
+	"X Tools"		f.title
+	"a. Cut Buffers (C)"	!"xcb &"
+	"b. Clipboard"		!"xclipboard &"
+	"c. Fonts"		!"xfontsel &"
+	"d. Keys"		!"xkeycaps &"
+	"e. Ruler"		!"kruler &"
+	"f. Events"		!"xev &"
+	"g. Perfmon"		!"xperfmon &"
+	"h. X Meter"		!"xmter &"
+	"i. Eyes"		!"xeyes &"
+}
+
+menu "Web" {
+	"Web"			f.title
+	"a. Default Browser (I)"!"netscapewin &"
+	"b. Netscape"		!"netscape &"
+	"c. Mozilla"		!"mozilla &"
+	"d. Firefox"		!"firefox &"
+	"e. Galeon"		!"galeon &"
+	"f. Epiphany"		!"epiphany &"
+	"g. Konqueror"		!"konqueror &"
+	"h. Opera"		!"opera &"
+}
+
+menu "Documentation" {
+	"Documentation"		f.title
+	"a. Unix Manual (U)"	!"xman &"
+	"b. Helptool"		!"helptool &"
+	"c. Solaris"		!"answerbook &"
+}
+
+menu "Faces" {
+	"Faces"			f.title
+	"a. Mail"		!"facemon xmail &"
+	"b. News (N)"		!"facemon xnewscheck &"
+	"c. cs.system"		!"facemon xnewsfrom &"
+	"d. Newsrc"		!"facemon xnewsrc &"
+	"e. Sidebar"		!"facemon -G sidebar &"
+	"f. Printer"		!"facemon lpq &"
+	"g. Printer ps22"	!"facemon ps22 &"
+	"h. Oracle"		("white":"blue") f.menu "OracleFaces"
+	"i. System"		("white":"blue") f.menu "SystemFaces"
+	"j. Collections"	("white":"blue") f.menu "FacesCollections"
+}
+
+menu "OracleFaces" {
+	"Oracle"		f.title
+	"a. Oracularities"	!"facemon xrecd &"
+	"b. Votes"		!"facemon xvote &"
+	"c. All"		!"facemon xoracle &"
+}
+
+menu "SystemFaces" {
+	"System"		f.title
+	"a. Printers All"	!"facemon xlpqall &"
+	"b. Mailq"		!"facemon xmailqs &"
+	"c. Mailq moose"	!"facemon xcmailqs &"
+	"d. Weather"		!"facemon xwx &"
+	"e. All"		!"facemon xsystem &"
+}
+
+menu "FacesCollections" {
+	"Collections"		f.title
+	"a. Xface"		!"facemon xxface &"
+	"b. Local"		!"facemon xlocal &"
+	"c. New Local"		!"facemon xnewlocal &"
+	"d. Domains"		!"facemon xdomains &"
+	"e. New Domains"	!"facemon xnewdomains &"
+	"f. Unknown"		!"facemon xunknown &"
+	"g. New Unknown"	!"facemon xnewunknown &"
+	"h. News"		!"facemon xnews &"
+	"i. New News"		!"facemon xnewnews &"
+	"j. Weather"		!"facemon xweather &"
+	"k. New Weather"	!"facemon xnewweather &"
+	"l. Misc"		!"facemon xmisc &"
+	"m. New Misc"		!"facemon xnewmisc &"
+	"n. Users"		!"facemon xusers &"
+	"o. New Users"		!"facemon xnewusers &"
+	"p. Usenix"		!"facemon xusenix &"
+}
+
+menu "Eject" {
+	"Eject"			f.title
+	"a. Default (E)"	!"eject &"
+	"b. Floppy"		!"eject floppy &"
+	"b. Floppy 0"		!"eject floppy0 &"
+	"c. Floppy 1"		!"eject floppy1 &"
+	"d. CD-ROM"		!"eject cdrom &"
+	"d. CD-ROM 0"		!"eject cdrom0 &"
+	"e. CD-ROM 1"		!"eject cdrom1 &"
+}
+
+menu "Games" {
+	"Games"			f.title
+	"a. Frozen Bubble"	!"xterm -e frozen-bubble &"
+	"b. Neverwinter Nights (N)"	!"nwn &"
+}
+
+## TWM ## Host Menus ##########################################################
+
+menu "Hosts" {
+	"Hosts"			f.title
+	"a. console (c)"	!"xt -C -name xterm-console &"
+	"b. LOCAL (L)"		!"xt -name xterm-MAIN -N LOCAL &"
+	"c. local (l)"		!"xt -name xterm-local &"
+	"d. MAILHOST (M)"	!"xt -name xterm-MAIN -N $MAILHTIT $MAILHOST &"
+	"e. mailhost (m)"	!"xt -name xterm-main -N $MAILHtit $MAILHOST &"
+	"f. KINZLER (K)"	!"xt -name xterm-MAIN -N KINZLER ':hosts ppp' &"
+	"g. kinzler (k, ^K)"	!"xt -N kinzler ':hosts ppp' &"
+	"h. aludel (z)"		!"xt aludel &"
+	"i. alamode (a)"	!"xt -N alamode $AH &"
+	"j. alamoff (f)"	!"xt -N alamoff $FH &"
+	"k. alembic (b)"	!"xt -N alembic $BH &"
+	"l. swank (s)"		!"xt -N swank $SH &"
+	"n. transit (t)"	!"xt -N transit $TH &"
+	"m. trendy (y)"		!"xt -N trendy $YH &"
+	"o. login (h)"		!"xt -N login -ssh $LH &"
+	"p. carelink (r)"	!"xt -N carelink -ssh $CH &"
+	"q. megamouth (n)"	!"xt megamouth &"
+	"r. moose (o)"		!"xt moose &"
+	"s. hmrc2"		!"wfica &"
+	"t. My Hosts"		("white":"blue") f.menu "MyHosts"
+	"u. Hostlists"		("white":"blue") f.menu "Hostlists"
+}
+
+# DO NOT DELETE THIS LINE -- makehostmenus depends on it
+# Generated by makehostmenus
+
+menu "MyHosts" {
+	"My Hosts"		f.title
+	"moose"                 !"xt moose &"
+	"kinzler.homeunix.com"  !"xt kinzler.homeunix.com &"
+	"aludel"                !"xt aludel &"
+	"alamode.hmrc.kines.umich.edu"!"xt alamode.hmrc.kines.umich.edu &"
+	"alembic.hmrc.kines.umich.edu"!"xt alembic.hmrc.kines.umich.edu &"
+	"alamoff.hmrc.kines.umich.edu"!"xt alamoff.hmrc.kines.umich.edu &"
+	"transit.hmrc.kines.umich.edu"!"xt transit.hmrc.kines.umich.edu &"
+	"trendy.hmrc.kines.umich.edu"!"xt trendy.hmrc.kines.umich.edu &"
+	"login.itd.umich.edu"   !"xt login.itd.umich.edu &"
+	"wellbeingassessment.ahmg.com.au"!"xt wellbeingassessment.ahmg.com.au &"
+	"mutt"                  !"xt mutt &"
+	"megamouth"             !"xt megamouth &"
+	"grouchy"               !"xt grouchy &"
+	"whale"                 !"xt whale &"
+	"dagwood"               !"xt dagwood &"
+	"helga"                 !"xt helga &"
+	"tank"                  !"xt tank &"
+	"school"                !"xt school &"
+	"paca"                  !"xt paca &"
+	"angel"                 !"xt angel &"
+}
+
+menu "Hostlists" {
+	"Hostlists"		f.title
+	"unix"			("white":"blue") f.menu "Hostlist unix"
+#	"foreign"		("white":"blue") f.menu "Hostlist foreign"
+}
+
+menu "Hostlist unix" {
+	"extreme"		("white":"blue") f.menu "Hostlist extreme"
+	"linux"			("white":"blue") f.menu "Hostlist linux"
+	"next3"			("white":"blue") f.menu "Hostlist next3"
+	"osl"			("white":"blue") f.menu "Hostlist osl"
+	"sgi"			("white":"blue") f.menu "Hostlist sgi"
+	"solaris"		("white":"blue") f.menu "Hostlist solaris"
+	"sunos"			("white":"blue") f.menu "Hostlist sunos"
+}
+
+menu "Hostlist extreme" {
+	"extreme-linux"		("white":"blue") f.menu "Hostlist extreme-linux"
+	"extreme-macosx"	("white":"blue") f.menu "Hostlist extreme-macosx"
+	"extreme-solaris"	("white":"blue") f.menu "Hostlist extreme-solaris"
+}
+
+menu "Hostlist extreme-linux" {
+	"bleu"			!"xt bleu &"
+	"brick"			!"xt brick &"
+	"everest"		!"xt everest &"
+	"exodus"		!"xt exodus &"
+	"hunk"			!"xt hunk &"
+	"kilimanjaro"		!"xt kilimanjaro &"
+	"lead"			!"xt lead &"
+	"linbox1"		!"xt linbox1 &"
+	"linbox3"		!"xt linbox3 &"
+	"mneme"			!"xt mneme &"
+	"montblanc"		!"xt montblanc &"
+	"part"			!"xt part &"
+	"snowdon"		!"xt snowdon &"
+	"whitney"		!"xt whitney &"
+}
+
+menu "Hostlist extreme-macosx" {
+	"apple1"		!"xt apple1 &"
+	"apple2"		!"xt apple2 &"
+	"himalaya"		!"xt himalaya &"
+	"mac"			!"xt mac &"
+	"mutlimac"		!"xt mutlimac &"
+	"rushmore"		!"xt rushmore &"
+}
+
+menu "Hostlist extreme-solaris" {
+	"extreme-solaris-8"	("white":"blue") f.menu "Hostlist extreme-solaris-8"
+}
+
+menu "Hostlist extreme-solaris-8" {
+	"extreme-solaris-8-sun4u"	("white":"blue") f.menu "Hostlist extreme-solaris-8-sun4u"
+}
+
+menu "Hostlist extreme-solaris-8-sun4u" {
+	"rainier"		!"xt rainier &"
+}
+
+menu "Hostlist linux" {
+	"burrow-cluster-linux"	("white":"blue") f.menu "Hostlist burrow-cluster-linux"
+	"linux-trusted"		("white":"blue") f.menu "Hostlist linux-trusted"
+}
+
+menu "Hostlist burrow-cluster-linux" {
+	"hazel"			!"xt hazel &"
+	"silo"			!"xt silo &"
+	"burrow-cluster-linux-lh004"	("white":"blue") f.menu "Hostlist burrow-cluster-linux-lh004"
+	"burrow-cluster-linux-lh008"	("white":"blue") f.menu "Hostlist burrow-cluster-linux-lh008"
+	"burrow-cluster-linux-lh035"	("white":"blue") f.menu "Hostlist burrow-cluster-linux-lh035"
+	"hazel-cluster"		("white":"blue") f.menu "Hostlist hazel-cluster"
+}
+
+menu "Hostlist burrow-cluster-linux-lh004" {
+	"bandicoot"		!"xt bandicoot &"
+	"blesmol"		!"xt blesmol &"
+	"bobac"			!"xt bobac &"
+	"degu"			!"xt degu &"
+	"jerboa"		!"xt jerboa &"
+	"marmot"		!"xt marmot &"
+	"molerat"		!"xt molerat &"
+	"prairiedog"		!"xt prairiedog &"
+}
+
+menu "Hostlist burrow-cluster-linux-lh008" {
+	"copperhead"		!"xt copperhead &"
+	"cottonmouth"		!"xt cottonmouth &"
+	"diamondback"		!"xt diamondback &"
+	"garter"		!"xt garter &"
+	"hognose"		!"xt hognose &"
+	"racer"			!"xt racer &"
+	"redbelly"		!"xt redbelly &"
+	"ribbon"		!"xt ribbon &"
+	"ringneck"		!"xt ringneck &"
+}
+
+menu "Hostlist burrow-cluster-linux-lh035" {
+	"basalt"		!"xt basalt &"
+	"breccia"		!"xt breccia &"
+	"chert"			!"xt chert &"
+	"coal"			!"xt coal &"
+	"dacite"		!"xt dacite &"
+	"diorite"		!"xt diorite &"
+	"gabbro"		!"xt gabbro &"
+	"gneiss"		!"xt gneiss &"
+	"granite"		!"xt granite &"
+	"limestone"		!"xt limestone &"
+	"marble"		!"xt marble &"
+	"onyx"			!"xt onyx &"
+	"phyllite"		!"xt phyllite &"
+	"quartzite"		!"xt quartzite &"
+	"sandstone"		!"xt sandstone &"
+	"schist"		!"xt schist &"
+	"shale"			!"xt shale &"
+	"siltstone"		!"xt siltstone &"
+	"slate"			!"xt slate &"
+	"travertine"		!"xt travertine &"
+}
+
+menu "Hostlist hazel-cluster" {
+	"hazel1"		!"xt hazel1 &"
+	"hazel2"		!"xt hazel2 &"
+	"hazel3"		!"xt hazel3 &"
+	"hazel4"		!"xt hazel4 &"
+	"hazel5"		!"xt hazel5 &"
+	"hazel6"		!"xt hazel6 &"
+	"hazel7"		!"xt hazel7 &"
+	"hazel8"		!"xt hazel8 &"
+}
+
+menu "Hostlist linux-trusted" {
+	"newmoose"		!"xt newmoose &"
+	"linux-passwd"		("white":"blue") f.menu "Hostlist linux-passwd"
+	"shark-cluster-linux"	("white":"blue") f.menu "Hostlist shark-cluster-linux"
+}
+
+menu "Hostlist linux-passwd" {
+}
+
+menu "Hostlist shark-cluster-linux" {
+	"agni"			!"xt agni &"
+	"alcazar"		!"xt alcazar &"
+	"aquaman"		!"xt aquaman &"
+	"arlo"			!"xt arlo &"
+	"asterix"		!"xt asterix &"
+	"batman"		!"xt batman &"
+	"batson"		!"xt batson &"
+	"beetle"		!"xt beetle &"
+	"belfry"		!"xt belfry &"
+	"bitternut"		!"xt bitternut &"
+	"bizarro"		!"xt bizarro &"
+	"blob"			!"xt blob &"
+	"blondie"		!"xt blondie &"
+	"brainiac"		!"xt brainiac &"
+	"brutus"		!"xt brutus &"
+	"bucky"			!"xt bucky &"
+	"calvin"		!"xt calvin &"
+	"camelia"		!"xt camelia &"
+	"casper"		!"xt casper &"
+	"catbert"		!"xt catbert &"
+	"charybdis"		!"xt charybdis &"
+	"chinkapin"		!"xt chinkapin &"
+	"coffeetree"		!"xt coffeetree &"
+	"connery"		!"xt connery &"
+	"conqueror"		!"xt conqueror &"
+	"cosmo"			!"xt cosmo &"
+	"curie"			!"xt curie &"
+	"dagwood"		!"xt dagwood &"
+	"daredevil"		!"xt daredevil &"
+	"daria"			!"xt daria &"
+	"dilbert"		!"xt dilbert &"
+	"dogbert"		!"xt dogbert &"
+	"dottie"		!"xt dottie &"
+	"dusty"			!"xt dusty &"
+	"eel"			!"xt eel &"
+	"entity"		!"xt entity &"
+	"flash"			!"xt flash &"
+	"formosa"		!"xt formosa &"
+	"fritzi"		!"xt fritzi &"
+	"frog"			!"xt frog &"
+	"fuzz"			!"xt fuzz &"
+	"garbo"			!"xt garbo &"
+	"garner"		!"xt garner &"
+	"giganta"		!"xt giganta &"
+	"ginkgo"		!"xt ginkgo &"
+	"gizmo"			!"xt gizmo &"
+	"gladys"		!"xt gladys &"
+	"goldie"		!"xt goldie &"
+	"haddock"		!"xt haddock &"
+	"hawkman"		!"xt hawkman &"
+	"helga"			!"xt helga &"
+	"hepburn"		!"xt hepburn &"
+	"hercules"		!"xt hercules &"
+	"hobbes"		!"xt hobbes &"
+	"hulk"			!"xt hulk &"
+	"irma"			!"xt irma &"
+	"janis"			!"xt janis &"
+	"jeevan"		!"xt jeevan &"
+	"joker"			!"xt joker &"
+	"jughead"		!"xt jughead &"
+	"kamala"		!"xt kamala &"
+	"kingston"		!"xt kingston &"
+	"kiosk"			!"xt kiosk &"
+	"lekha"			!"xt lekha &"
+	"lh102linux"		!"xt lh102linux &"
+	"lh115linux"		!"xt lh115linux &"
+	"linus"			!"xt linus &"
+	"liveoak"		!"xt liveoak &"
+	"loon"			!"xt loon &"
+	"ludwig"		!"xt ludwig &"
+	"magnolia"		!"xt magnolia &"
+	"manfred"		!"xt manfred &"
+	"marmaduke"		!"xt marmaduke &"
+	"michigan"		!"xt michigan &"
+	"milter"		!"xt milter &"
+	"mimic"			!"xt mimic &"
+	"mugo"			!"xt mugo &"
+	"nestor"		!"xt nestor &"
+	"newman"		!"xt newman &"
+	"opus"			!"xt opus &"
+	"pagodatree"		!"xt pagodatree &"
+	"pawan"			!"xt pawan &"
+	"pegasus"		!"xt pegasus &"
+	"phoenix"		!"xt phoenix &"
+	"pigpen"		!"xt pigpen &"
+	"pogo"			!"xt pogo &"
+	"prithvi"		!"xt prithvi &"
+	"rage"			!"xt rage &"
+	"ramona"		!"xt ramona &"
+	"ratbert"		!"xt ratbert &"
+	"riddler"		!"xt riddler &"
+	"robin"			!"xt robin &"
+	"robwilco"		!"xt robwilco &"
+	"rollo"			!"xt rollo &"
+	"roz"			!"xt roz &"
+	"rumba"			!"xt rumba &"
+	"sarge"			!"xt sarge &"
+	"sassafras"		!"xt sassafras &"
+	"satchel"		!"xt satchel &"
+	"seafox"		!"xt seafox &"
+	"sequoia"		!"xt sequoia &"
+	"shakti"		!"xt shakti &"
+	"shortly"		!"xt shortly &"
+	"sid"			!"xt sid &"
+	"sluggo"		!"xt sluggo &"
+	"smoketree"		!"xt smoketree &"
+	"snoopy"		!"xt snoopy &"
+	"snorkel"		!"xt snorkel &"
+	"snowy"			!"xt snowy &"
+	"sourgum"		!"xt sourgum &"
+	"spiderman"		!"xt spiderman &"
+	"spitz"			!"xt spitz &"
+	"spot"			!"xt spot &"
+	"stucco"		!"xt stucco &"
+	"superman"		!"xt superman &"
+	"tamarack"		!"xt tamarack &"
+	"tank"			!"xt tank &"
+	"tendulkar"		!"xt tendulkar &"
+	"test"			!"xt test &"
+	"thing"			!"xt thing &"
+	"tintin"		!"xt tintin &"
+	"toad"			!"xt toad &"
+	"troy"			!"xt troy &"
+	"vela"			!"xt vela &"
+	"veronica"		!"xt veronica &"
+	"wabash"		!"xt wabash &"
+	"wack"			!"xt wack &"
+	"watcher"		!"xt watcher &"
+	"willow"		!"xt willow &"
+	"wink"			!"xt wink &"
+	"woodstock"		!"xt woodstock &"
+	"yosemitesam"		!"xt yosemitesam &"
+	"zero"			!"xt zero &"
+	"ziggy"			!"xt ziggy &"
+	"shark-cluster-linux-lh125"	("white":"blue") f.menu "Hostlist shark-cluster-linux-lh125"
+	"shark-cluster-linux-vm"	("white":"blue") f.menu "Hostlist shark-cluster-linux-vm"
+}
+
+menu "Hostlist shark-cluster-linux-lh125" {
+	"angel"			!"xt angel &"
+	"beast"			!"xt beast &"
+	"cyclops"		!"xt cyclops &"
+	"iceman"		!"xt iceman &"
+	"jubilee"		!"xt jubilee &"
+	"polaris"		!"xt polaris &"
+	"rogue"			!"xt rogue &"
+	"wolverine"		!"xt wolverine &"
+}
+
+menu "Hostlist shark-cluster-linux-vm" {
+	"silktree-vm1"		!"xt silktree-vm1 &"
+	"silktree-vm2"		!"xt silktree-vm2 &"
+	"silktree-vm3"		!"xt silktree-vm3 &"
+	"silktree-vm4"		!"xt silktree-vm4 &"
+}
+
+menu "Hostlist next3" {
+	"point"			!"xt point &"
+}
+
+menu "Hostlist osl" {
+	"osl-linux"		("white":"blue") f.menu "Hostlist osl-linux"
+	"osl-macosx"		("white":"blue") f.menu "Hostlist osl-macosx"
+	"osl-solaris"		("white":"blue") f.menu "Hostlist osl-solaris"
+}
+
+menu "Hostlist osl-linux" {
+	"osl-linux-rh"		("white":"blue") f.menu "Hostlist osl-linux-rh"
+}
+
+menu "Hostlist osl-linux-rh" {
+	"osl-linux-rhel4"	("white":"blue") f.menu "Hostlist osl-linux-rhel4"
+	"osl-linux-rhel5"	("white":"blue") f.menu "Hostlist osl-linux-rhel5"
+}
+
+menu "Hostlist osl-linux-rhel4" {
+	"eddie"			!"xt eddie &"
+	"gibson"		!"xt gibson &"
+	"milliways"		!"xt milliways &"
+	"rontok"		!"xt rontok &"
+	"sourcehaven"		!"xt sourcehaven &"
+	"vogon"			!"xt vogon &"
+	"wowbagger"		!"xt wowbagger &"
+}
+
+menu "Hostlist osl-linux-rhel5" {
+}
+
+menu "Hostlist osl-macosx" {
+	"fook"			!"xt fook &"
+	"ford"			!"xt ford &"
+	"frood"			!"xt frood &"
+	"gargle-blaster"	!"xt gargle-blaster &"
+	"garkbit"		!"xt garkbit &"
+	"golgafrincham"		!"xt golgafrincham &"
+	"halfrunt"		!"xt halfrunt &"
+	"hoopy"			!"xt hoopy &"
+	"jeltz"			!"xt jeltz &"
+	"krikkit"		!"xt krikkit &"
+	"lunkwill"		!"xt lunkwill &"
+	"marvin"		!"xt marvin &"
+	"shooty"		!"xt shooty &"
+	"slartibartfast"	!"xt slartibartfast &"
+	"towel"			!"xt towel &"
+	"traal"			!"xt traal &"
+	"vroomfondel"		!"xt vroomfondel &"
+	"wicket"		!"xt wicket &"
+	"wonko"			!"xt wonko &"
+	"zaphod"		!"xt zaphod &"
+	"zarniwop"		!"xt zarniwop &"
+	"zarquon"		!"xt zarquon &"
+}
+
+menu "Hostlist osl-solaris" {
+	"osl-solaris-8"		("white":"blue") f.menu "Hostlist osl-solaris-8"
+}
+
+menu "Hostlist osl-solaris-8" {
+	"magrathea"		!"xt magrathea &"
+}
+
+menu "Hostlist sgi" {
+	"badger"		!"xt badger &"
+	"india"			!"xt india &"
+}
+
+menu "Hostlist solaris" {
+	"solaris-2.6"		("white":"blue") f.menu "Hostlist solaris-2.6"
+	"solaris-2.7"		("white":"blue") f.menu "Hostlist solaris-2.7"
+	"solaris-8"		("white":"blue") f.menu "Hostlist solaris-8"
+}
+
+menu "Hostlist solaris-2.6" {
+	"solaris-2.6-sun4m"	("white":"blue") f.menu "Hostlist solaris-2.6-sun4m"
+}
+
+menu "Hostlist solaris-2.6-sun4m" {
+	"solaris-2.6-trusted-sun4m"	("white":"blue") f.menu "Hostlist solaris-2.6-trusted-sun4m"
+}
+
+menu "Hostlist solaris-2.6-trusted-sun4m" {
+}
+
+menu "Hostlist solaris-2.7" {
+	"solaris-2.7-sun4u"	("white":"blue") f.menu "Hostlist solaris-2.7-sun4u"
+}
+
+menu "Hostlist solaris-2.7-sun4u" {
+	"solaris-2.7-trusted-sun4u"	("white":"blue") f.menu "Hostlist solaris-2.7-trusted-sun4u"
+}
+
+menu "Hostlist solaris-2.7-trusted-sun4u" {
+	"mutt"			!"xt mutt &"
+}
+
+menu "Hostlist solaris-8" {
+	"solaris-8-sun4u"	("white":"blue") f.menu "Hostlist solaris-8-sun4u"
+}
+
+menu "Hostlist solaris-8-sun4u" {
+	"solaris-8-trusted-sun4u"	("white":"blue") f.menu "Hostlist solaris-8-trusted-sun4u"
+	"solaris-8-untrusted-sun4u"	("white":"blue") f.menu "Hostlist solaris-8-untrusted-sun4u"
+}
+
+menu "Hostlist solaris-8-trusted-sun4u" {
+	"grouchy"		!"xt grouchy &"
+	"grumpy"		!"xt grumpy &"
+	"megamouth"		!"xt megamouth &"
+	"moose"			!"xt moose &"
+	"runt"			!"xt runt &"
+	"school"		!"xt school &"
+	"sparcplug"		!"xt sparcplug &"
+	"typhoon"		!"xt typhoon &"
+	"whale"			!"xt whale &"
+	"zebra"			!"xt zebra &"
+	"solaris-8-orchestra-sun4u"	("white":"blue") f.menu "Hostlist solaris-8-orchestra-sun4u"
+	"solaris-8-scrap"	("white":"blue") f.menu "Hostlist solaris-8-scrap"
+}
+
+menu "Hostlist solaris-8-orchestra-sun4u" {
+}
+
+menu "Hostlist solaris-8-scrap" {
+}
+
+menu "Hostlist solaris-8-untrusted-sun4u" {
+	"burrow-cluster-solaris"	("white":"blue") f.menu "Hostlist burrow-cluster-solaris"
+	"burrow-server"		("white":"blue") f.menu "Hostlist burrow-server"
+}
+
+menu "Hostlist burrow-cluster-solaris" {
+}
+
+menu "Hostlist burrow-server" {
+	"paca"			!"xt paca &"
+}
+
+menu "Hostlist sunos" {
+}

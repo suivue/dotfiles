@@ -1,0 +1,49 @@
+function "set-desktop-1"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "vdesk 1"
+}
+
+function "set-desktop-2"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "vdesk 2"
+}
+
+function "set-desktop-3"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "vdesk 3"
+}
+
+function "set-desktop-4"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "vdesk 4"
+}
+
+function "desktop-forward"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "A=$((`vdesk`+1)); if [ $A = 5 ] ; then A=1 ; fi ; vdesk $A"   
+}
+
+function "desktop-back"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "A=$((`vdesk`-1)); if [ $A = 0 ] ; then A=4 ; fi ; vdesk $A"   
+}
+
+"1"   = c|m   : all         : f.function "set-desktop-1"
+"2"   = c|m   : all         : f.function "set-desktop-2"
+"3"   = c|m   : all         : f.function "set-desktop-3"
+"4"   = c|m   : all         : f.function "set-desktop-4"
+
+"Right"   = c|m   : all         : f.function "desktop-forward"
+"Left"   = c|m   : all         : f.function "desktop-back"

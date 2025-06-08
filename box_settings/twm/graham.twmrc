@@ -1,0 +1,155 @@
+#
+# Default twm configuration file; needs to be kept small to conserve string
+# space in systems whose compilers don't handle medium-sized strings.
+#
+# Sites should tailor this file, providing any extra title buttons, menus, etc.
+# that may be appropriate for their environment.  For example, if most of the
+# users were accustomed to uwm, the defaults could be set up not to decorate
+# any windows and to use meta-keys.
+#
+
+# No defaults
+NoDefaults
+
+# Icons and titlebar buttons (courtesy: 'Graham's TWM page!')
+IconDirectory "/home/jr/.twm/icons" # Non default directory for icons
+LeftTitleButton "resize.xbm" = f.resize
+RightTitleButton "minimize.xbm" = f.iconify
+RightTitleButton "maximize.xbm" = f.fullzoom
+RightTitleButton "close.xbm" = f.delete
+
+# Window decoration
+BorderWidth 1             # No. of pixels for border around entire window
+FramePadding 5            # No. of pixels between titlebar buttons and frame
+#TitleButtonBorderWidth 0 # No. of pixels for button border
+TitlePadding 2            # No. of pixels around title buttons
+ButtonIndent 0            # Larger seems to squash buttons together
+MenuBorderWidth 1         # Number of pixels for menu border
+NoMenuShadows             # No shadow behind the menu
+
+# Misc
+NoGrabServer
+RestartPreviousState
+DecorateTransients
+
+# Fonts
+#TitleFont       "-gnu-unifont-medium-r-normal--16-*-*-*-*-*-iso10646-1,-*-helvetica-medium-r-*--17-*-*-*-*-*-*-*,-*-*-medium-r-normal-*-16-*-*-*-*-*-*-*,-*--16-*,*" 
+#ResizeFont      "-gnu-unifont-medium-r-normal--16-*-*-*-*-*-iso10646-1,-*-helvetica-medium-r-*--17-*-*-*-*-*-*-*,-*-*-medium-r-normal-*-16-*-*-*-*-*-*-*,-*--16-*,*"
+#MenuFont        "-gnu-unifont-medium-r-normal--16-*-*-*-*-*-iso10646-1,-*-helvetica-medium-r-*--17-*-*-*-*-*-*-*,-*-*-medium-r-normal-*-16-*-*-*-*-*-*-*,-*--16-*,*"
+#IconFont        "-gnu-unifont-medium-r-normal--16-*-*-*-*-*-iso10646-1,-*-helvetica-medium-r-*--17-*-*-*-*-*-*-*,-*-*-medium-r-normal-*-16-*-*-*-*-*-*-*,-*--16-*,*"
+#IconManagerFont "-gnu-unifont-medium-r-normal--16-*-*-*-*-*-iso10646-1,-*-helvetica-medium-r-*--17-*-*-*-*-*-*-*,-*-*-medium-r-normal-*-16-*-*-*-*-*-*-*,-*--16-*,*"
+#-*-clean-*-*-*-*-14-*-*-*-*-*-*-* -> does not work, crashes on antix
+#-*-fixed-medium-r-*-*-16-*-*-*-*-*-*-* -> similar to gnu-unifont
+TitleFont  "-*-clean-*-*-*-*-14-*-*-*-*-*-*-*,-*-fixed-medium-r-*-*-15-*-*-*-*-*-*-*" 
+TitleFont  "-*-clean-*-*-*-*-14-*-*-*-*-*-*-*,-*-fixed-medium-r-*-*-15-*-*-*-*-*-*-*" 
+ResizeFont "-*-clean-*-*-*-*-14-*-*-*-*-*-*-*,"
+MenuFont   "-*-clean-*-*-*-*-14-*-*-*-*-*-*-*,-*-fixed-medium-r-*-*-15-*-*-*-*-*-*-*"
+IconFont  "-*-clean-*-*-*-*-14-*-*-*-*-*-*-*,-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*"
+IconManagerFont "-*-clean-*-*-*-*-14-*-*-*-*-*-*-*,-*-fixed-medium-r-*-*-16-*-*-*-*-*-*-*"
+
+#ClientBorderWidth
+
+Color
+{
+    BorderColor "slategrey"
+    DefaultBackground "rgb:2/a/9"
+    DefaultForeground "gray85"
+    TitleBackground "rgb:2/a/9"
+    TitleForeground "gray85"
+    MenuBackground "rgb:2/a/9"
+    MenuForeground "gray85"
+    MenuBorderColor "slategrey"
+    MenuTitleBackground "gray70"
+    MenuTitleForeground "rgb:2/a/9"
+    IconBackground "rgb:2/a/9"
+    IconForeground "gray85"
+    IconBorderColor "gray85"
+    IconManagerBackground "rgb:2/a/9"
+    IconManagerForeground "gray85"
+}
+
+#
+# Define some useful functions for motion-based actions.
+#
+DefaultFunction f.nop
+
+MoveDelta 3
+Function "move-or-lower" { f.move f.deltastop f.lower }
+Function "move-or-raise" { f.move f.deltastop f.raise }
+Function "move-or-iconify" { f.move f.deltastop f.iconify }
+
+# Mouse and keyboard settings
+# 
+# Button1=left, Button2=middle (both buttons/scroll-wheel clicked together),
+# Button3=right, m=meta or alt, c=ctrl, s=shift
+# 
+# Set some useful bindings.  Taken from Graham's TWM page!
+#
+Button1 = : root : f.menu "RootMenu"
+Button2 = : root : f.menu "System"
+Button3 = : root : f.menu "TwmWindows"
+
+Button1 = : title : f.function "move-or-raise"
+#Button2 = : title : f.raiselower
+Button2 = : title|frame : f.menu "WindowMenu"
+Button3 = : title|frame : f.resize
+
+Button1 = : icon : f.function "move-or-iconify"
+Button2 = : icon : f.iconify
+
+Button1 = : iconmgr : f.iconify
+Button2 = : iconmgr : f.iconify
+
+# m does not work for some reason.
+Button1 = m : window|icon : f.function "move-or-lower"
+Button2 = m : window|icon : f.iconify
+Button3 = s : window 	  : f.resize
+
+# Hold Alt and Tab cycles through windows bringing up focus
+Function "winup" {
+  f.circleup
+}
+"Tab" = m : root|window|frame|title : f.function "winup" 
+
+# Hold Alt and left click window title to maximize window vertically
+Button1 = m : title|frame : f.zoom
+
+# Hold Alt and right click window title to maximize window horizontally
+Button3 = m : title|frame : f.horizoom
+#
+# And a menus with the usual things
+#
+menu "RootMenu"
+{
+"Twm Menu"	f.title
+"Xterm"		f.exec "exec xterm &"
+"Web Browser"	f.exec "firefox &"
+"File Manager"	f.exec "rox &"
+""		f.nop
+"openSUSE Menu"	f.menu ""
+""		f.nop
+"Show Iconmgr"	f.showiconmgr
+"Hide Iconmgr"	f.hideiconmgr
+""		f.nop
+"Restart"	f.restart
+"Exit"		f.quit
+}
+
+menu "System"
+{
+"System"	f.title
+"Iconify"	f.iconify
+"Resize"	f.resize
+"Move"		f.move
+"Raise"		f.raise
+"Lower"		f.lower
+""		f.nop
+"Focus"		f.focus
+"Unfocus"	f.unfocus
+""		f.nop
+"Kill"		f.destroy
+"Delete"	f.delete
+""		f.nop
+"Restart"	f.restart
+"Exit"		f.quit
+}

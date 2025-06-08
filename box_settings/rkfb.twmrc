@@ -1,0 +1,592 @@
+# twmrc rkfb
+# built around the twmrc file belonging to Eric Myers available at:
+# http://www.spy-hill.net/pub/myers/src/adm/skel/sample.twmrc
+#######################################################################
+# FONTS:
+#
+# Use the X 11 Release 3 names for the Adobe Times Roman font suite,
+# and the old names for the fixed-size fonts.
+
+TitleFont  "-*-terminus-medium-r-normal--18-*"
+ResizeFont "-*-terminus-bold-r-normal--*-140-*-*-*-*-*-*"
+MenuFont   "-*-terminus*medium*r*normal*-18-*"
+IconFont   "-*-terminus-bold-r-normal*-14-*"
+IconManagerFont "-*-terminus-bold-r-normal--*-140-*-*-*-*-*-*"
+
+#######################################################################
+# VARIABLES:  see also .Xresources or .Xdefaults
+#
+# Global parameters. Setting the first few ``No'' parameters makes
+# life on a slow X server a little more bearable.
+
+
+#NoRaiseOnResize	# don't raise a window after resizing it
+#NoRaiseOnMove		# nor when moving it
+#NoHighlight		# don't highlight the window that has the cursor
+#SqueezeTitle		# don't take title bar all the way across
+#NoTitleFocus		# pointer must be in *window* to see keyboard input
+RandomPlacement		# just put it anywhere and I'll move it later
+Zoom 3 			# zoom effect is nice, but not on slow computers
+ButtonIndent 2		
+DontMoveOff		# don't let windows move off the screen
+			# (But see f.forcemove usage below!)
+BorderWidth	3	# use 3 pixel border instead of 2
+
+IconDirectory	"/usr/local/lib/icons:lib/icons:/usr/local/include/X11/bitmaps"
+IconManagerGeometry   "-10+130"
+IconManagerHighlight  "DodgerBlue"
+#ShowIconManager		# display the TWM icon manager? 
+
+
+##
+# What to do on color displays:
+
+Color
+{
+
+	IconBackground       "AliceBlue" { "root" "DodgerBlue" }
+	IconForeground       "black"	 { "root" "white" }
+	IconBackground       "AliceBlue" { "system" "DodgerBlue" }
+	IconForeground       "black"	 { "system" "white" }
+	IconBackground       "AliceBlue" { "htop" "DodgerBlue" }
+	IconForeground       "black"	 { "htop" "white" }
+	IconBackground       "AliceBlue" { "battery" "DodgerBlue" }
+	IconForeground       "black"	 { "battery" "white" }
+	IconBackground       "AliceBlue" { "sensors" "DodgerBlue" }
+	IconForeground       "black"	 { "sensors" "white" }
+	IconBorderColor      "DodgerBlue"	 { "root" "LightCoral" }
+	IconBorderColor      "DodgerBlue"	 { "system" "LightCoral" }
+	IconBorderColor      "DodgerBlue"	 { "htop" "LightCoral" }
+	IconBorderColor      "DodgerBlue"	 { "battery" "LightCoral" }
+	IconBorderColor      "DodgerBlue"	 { "sensors" "LightCoral" }
+
+        BorderTileBackground "gray"
+        BorderTileForeground "grey2"
+	BorderColor	     "DodgerBlue"	 { "root" "LightCoral"  
+					   "xbiff"     "grey2" 
+					   "TWM Icon Manager" "black"} 
+        IconManagerBackground "AliceBlue"
+        IconManagerHighlight  "DodgerBlue"
+	TitleForeground	      "white"
+	TitleBackground	      "black"	 {"root" "DodgerBlue"}
+	MenuForeground	      "white"
+	MenuBackground	      "blue3"	
+##	MenuTitleForeground   "gray"
+##	MenuTitleBackground   "maroon"
+	MenuTitleBackground   "DarkSlateGray"
+	MenuTitleForeground   "white"
+}
+
+
+##
+# What to do on monochrome displays
+
+Monochrome
+{
+    BorderColor "black"
+    BorderTileForeground "black"
+    BorderTileBackground "gray85"
+#    IconBorderColor "black"
+}
+
+
+##
+# Automatically raise these windows whenever the cursor moves into them
+#
+Autoraise {
+	"TWM Icon Manager"
+	"xload" "mush"	"xclock" 
+	"gnuplot" "hostname" 
+}
+
+##	"xbiff"  
+##  "Minibuffer@`hostname`" 
+##	"XTerm"	  # this means the class of *all* xterm windows, be careful!
+##	"CONSOLE" # example of a single xterm window, called Console
+
+
+##
+# Icons for programs (can also often be set as resources in  .Xdefaults)
+
+Icons {
+	"XTerm"	"terminal"
+	"mush"  "mailempty"
+	"pine"  "mailempty"
+	"gnome-terminal"  "terminal"
+	"transmission-gtk" "terminal"
+	"MPlayer" "terminal"
+	"Mozilla Firefox" "terminal"
+	"cvlc" "terminal"
+}
+
+ IconRegion  "1010x80-200+3" North East 12 0
+ IconRegion  "1210x80-0+690" North East 12 6
+ IconRegion  "960x80+164+608" South West 12 6
+ IconRegion  "960x80+159+78" North West 12 0
+
+##
+# Don't bother to put these programs into the icon manager window
+
+IconManagerDontShow {
+	"xclock" "xbiff" "xload" "Perfmeter" "stalonetray" 
+}
+
+###
+#  Set up your own bitmaps for icons. The 
+#  bitmap defined below will apply to all
+#  xterms when they are iconified and the
+#  bitmap is located in /home/rkfb/bitmaps.
+###
+
+
+##
+# Cursors for special things
+
+Cursors {
+	Menu 	"sb_right_arrow"	# so pullovers point the RIGHT way!
+##	Wait	"coffee_mug"		# the mug sucks
+}
+
+##
+# Don't put a border around these windows
+
+NoHighlight {
+   "xeyes"    "xclock"   "xping" "xbiff"   
+   "stalonetray" "TWM Icon Manager" "conky"
+   "zsh" "vlc"
+#   "xman"   "xmeter"	  
+}
+
+##
+# Windows with no title bar
+
+NoTitle {
+   "xclock"   "xeyes"   "xmeter"   "xman"
+   "xping"    "xbiff"   "xload"	    "xhostname" "stalonetray" 
+   "TWM Icon Manager"   "Perfmeter" "MPlayer" "Spotify"
+}
+
+
+#######################################################################
+# FUNCTION KEYS: entries are of the form
+#
+# Key	 = 	Modlist	: Context	: Function
+#
+# Function key names are F1,..., F12, or L1, ..., L10, or R1, ..., R10.
+# The arrow keys are Up, Down, Left, and Right.
+# Regular keys are lower case letters a, b, ..., z
+# The space bar is "space"
+#
+# The  modlist  is  any  combination  of  the modifier names
+# shift, control, lock, meta, mod1,  mod2,  mod 3,  mod4,  or mod5
+# (which may be abbreviated as s, c, l, m, m1, m2, m3, m4, m5,
+# respectively) separated by  a  vertical  bar  (|). 
+#
+# Context  is  any  combination  of window, title, icon, root, frame,
+# iconmgr,  their  first  letters (iconmgr abbreviation is m), or all,
+# separated by a vertical  bar.
+
+# Sun and Dec both have F keys along the top of the keyboard
+
+# "F1"	 =		: window | title | icon : f.raiselower
+# "F2"	 =		: window | title | icon : f.iconify
+
+# Arrow keys can help manage windows.  Be sure to use ctrl!
+
+"Up"	=	c	: window	: f.raise
+"Down"	=	c	: window	: f.lower
+"Right" =	c	: window	: f.lower
+"Left" =	c	: window	: f.move
+
+
+# ALT keyboard for useful shortcuts
+
+# "F1"  =	         : window|title|icon : f.raiselower
+"Tab"  =    c	 :window|title|icon  : f.iconify
+
+"r"=		c|m	: all : f.twmrc		# Ctrl-Alt-R reloads .twmrc
+
+##
+#######################################################################
+# BUTTONS:
+#
+# Meaning of button entries is:
+#
+# Button = 	Mod	: Context	: Function
+#  where  Mod      is one or more of c, s, and m (control, shift, and meta
+#                  respectively). 
+#	  Context  is one of icon, root, title, frame, window, and iconmgr.
+#	  Function is defined in the twm manual page
+#  
+#  for example:
+#	  Button1 = c : title : f.zoom
+#  
+#  means that if you hold down the control key (c) and press the
+#  left button while the mouse pointer is in the title bar of a
+#  window, then the f.zoom function (see the manual page to see
+#  what that is) will be executed.
+
+##
+# ROOT WINDOW (background):
+
+Button1     =		: root		: f.menu "Main Menu"
+Button2     =		: root		: f.menu "Global Window Ops"
+Button3     =		: root		: f.menu "Single Window Ops"
+
+Button1 =       c	: root		: f.menu "Single Window Ops"
+Button1	=	s	: root		: f.menu "Global Window Ops"
+
+##
+# ICONS:
+
+Button1 =		: icon  : f.move
+Button2 =		: icon	: f.menu "Frame Menu"
+Button3	=		: icon	: f.iconify
+
+Button3	=	c	: icon	: f.iconify
+Button3	=	F2	: icon	: f.iconify
+
+Button1 =       s       : icon 	: f.forcemove	
+Button2 =	s	: icon	: f.menu "Frame Menu"
+Button3	=	s	: icon	: f.iconify
+
+
+# WINDOWS (and frame and title)
+
+Button2 =		: title		: f.menu "Frame Menu"
+
+# MOVE: first button moves windows or icons around by grabbing them 
+#       Use shift key to force window past screen boundary
+
+Button1 =		: title|frame 	: f.move
+Button1 =       s       : title|frame	: f.forcemove	
+
+
+# SELECT: last button opens an icon or raise/lowers the window
+
+Button3 =		: title		: f.raiselower
+
+
+# RESIZE: resize things without having to go up to the resize gadget
+
+Button3 =		: frame		: f.resize
+Button2 =		: frame		: f.resize
+
+Button1 =	s	: title		: f.fullzoom
+Button3 =	s	: title		: f.fullzoom
+
+Button1 =	c	: title		: f.zoom
+Button3 =	c	: title		: f.zoom
+
+
+
+# WINDOW FOCUS:
+
+Function "raise-focus" { f.raise f.unfocus f.focus }	
+Button1 =	F2	: window	: f.function "raise-focus"
+Button2 =	F2	: window | icon	: f.autoraise
+Button3 =	F2	: window	: f.focus
+
+Function "raise-unfocus" { f.raise f.unfocus  }	
+Button1 =	s	: window	: f.function "raise-unfocus"
+Button2 =	s	: window	: f.autoraise
+Button3 =	s	: window	: f.unfocus
+
+
+Button3	=	F2	: title	: f.iconify
+
+
+#######################################################################
+# MENUS:
+
+Menu "Frame Menu" {
+   "Frame Menu"			f.title
+   "Close/Open"			f.iconify
+   "Full Screen"		f.fullzoom
+   "Zoom"			f.zoom
+   "Resize"			f.resize
+   "Move"			f.move
+   "Front"			f.raise
+   "Back"			f.lower
+   "Refresh"			f.winrefresh
+   "Kill"			f.destroy
+   "Quit"			f.destroy
+}
+
+##
+# MAIN ROOT MENU:
+
+menu "Main Menu" {
+   "Main Menu"			f.title
+   "Development"		f.menu "Development"
+   "Games"			f.menu "Games"
+   "Graphics"			f.menu "Graphics"
+   "Library"			f.menu "Library"
+   "Multimedia"			f.menu "Multimedia"
+   "Network"			f.menu "Network"
+   "Office"			f.menu "Office"
+   "Preferences"		f.menu "Preferences"
+   "Shells"			f.menu "Shells"
+   "System"			f.menu "System"
+   "Tools"			f.menu "Tools"
+   "Window Manager"		f.menu "Window Manager"
+   "Refresh Display"		f.refresh
+   "Lock screen"		!"nice -3 xlock &"
+   "Help"			f.menu "Help"
+   "Exit TWM"			f.menu "Exit TWM"
+}
+
+##
+# SINGLE WINDOW OPERATIONS 
+
+Menu "Single Window Ops" {
+   "Single Window Ops"		f.title
+   "Identify"			f.identify
+   "(De)Iconify"		f.iconify
+   "Refresh"			f.winrefresh
+   "Destroy"			f.destroy
+   "Focus Kbd"			f.focus
+   "Unfocus Kbd"		f.unfocus
+   "Move"			f.move
+   "Resize"			f.resize
+   "Lower"			f.lower
+   "Raise"			f.raise
+}
+
+##
+# GLOBAL WINDOW OPERATIONS:
+
+menu "Global Window Ops" {
+   "Global Window Ops"		f.title
+   "Preferences"		f.menu "Preferences"
+   "Circulate Windows Up"	f.circleup
+   "Circulate Windows Down"	f.circledown
+   "Unfocus Keyboard"		f.unfocus
+   "Lock screen"		!"nice -3 xlock &"
+   "Reinitialize TWM"		f.twmrc
+   "Refresh Display"		f.refresh
+}
+
+
+##
+# EXIT:
+
+
+menu "Exit TWM" {
+    "Wait, I didn't mean it"  ("red":"white")	f.beep
+    "Yes, Really Exit!"	  ("green":"black")	f.quit
+##   "Yes, Really Exit!"	  f.quit
+}
+
+### MAIN MENU
+## 
+# BROWSERS:
+
+menu "Browsers" {
+   "Browsers"			f.title 
+   "Conkeror"			f.exec "xulrunner ~/Dropbox/openbox/conkeror/application.ini &"
+   "Dillo"			f.exec "dillo -g 1012x740+65+45 &"
+   "ELinks"			f.exec "xterm -g 128x50+48+0 -T ELinks -e elinks http://www.bbc.co.uk/news/uk/ &"
+   "Firefox"			f.exec "firefox -g 1040x760 &"
+   "Lynx"			f.exec "xterm -g 128x50+48+0 -e lynx &"
+   "Pale Moon"			f.exec "palemoon &"
+   "Seamonkey"			f.exec "seamonkey -g 1040x760 &"
+}
+
+##
+# DEVELOPMENT:
+
+menu "Development" {
+   "Development"	f.title
+   "Editors"		f.menu "Editors"
+}
+
+##
+# EDITORS:
+
+menu "Editors" {
+   "Editors"		f.title
+   "Emacs"		f.exec "emacs -g 128x50+48+0 -name emacs -title -emacs &"
+   "Nano"		!"xterm -fn 9x15 -g 80x48 -e nano &"
+   "Pico"		!"xterm -fn 9x15 -g 80x48 -e pico &"
+   "Vi" 		!"xterm -fn 9x15 -g 80x48 -e vi &"
+   "X Editor"		!"xedit -geometry +100+100 &"
+}
+
+##
+# GAMES:
+
+menu "Games" {
+   "Games"	f.title
+   "Eyes"		!"xeyes &"
+   "F1Spirit"     	f.exec "f1spirit &"
+   "Ico"		!"ico &"
+   "Nethack"		f.exec "xterm -g 128x50+48+0 -name 'Nethack' -T 'Nethack -e nethack &"
+   "Pysol"     		f.exec "pysol.py &"
+   "SuperTuxKart"     	f.exec "supertuxkart &"
+   "X Logo"	      	!"xlogo &"
+}
+
+## 
+# GRAPHICS:
+
+menu "Graphics" {
+   "Graphics"			f.title
+   "Xv"				!"xv &"			
+}
+
+##
+# HELP:
+
+menu "Help" {
+   "Help"   f.title
+   "TWM"	!"xterm -geometry 80x34+0-0 -T 'Help With TWM' -e man twm &"
+   "Unix"	!"xterm -geometry 80x34+0-0 -T 'Help With Unix' -e help &"
+   "X windows"	!"xterm -geometry 80x34+0-0 -T 'Help With X' -e xman &"
+}
+
+##
+# LIBRARY
+
+menu "Library" {
+   "Library"			f.title 
+   "CPAMA"			f.exec "mupdf -r 108 ~/Dropbox/openbox/library/c-programming-a-modern-approach.pdf &"
+   "CPIL"			f.exec "mupdf -r 108 ~/Dropbox/openbox/library/c-programming-in-linux.pdf &"
+   "ITMFC"			f.exec "mupdf -r 108 ~/Dropbox/openbox/library/intro-to-maths-for-computer.pdf &"
+   "KR C"			f.exec "mupdf -r 108 ~/Dropbox/openbox/library/kr-c.pdf &"
+   "LP 5"			f.exec "mupdf -r 108 ~/Dropbox/openbox/library/learning-python.pdf &"
+   "man TWM"			f.exec "xterm -geometry 128x50+48+0 -name 'man TWM' -T 'man TWM' -e man twm &"
+}
+
+##
+
+# MULTIMEDIA:
+
+menu "Multimedia" {
+   "Multimedia"	f.title
+   "BBC iPlayer"		f.exec "xulrunner ~/Dropbox/openbox/conkeror/application.ini http://www.bbc.co.uk/iplayer/ &"
+   "BBC Radio"			f.exec "xulrunner ~/Dropbox/openbox/conkeror/application.ini http://www.bbc.co.uk/radio/ &"
+   "Herrie"			f.exec "xterm -g 128x50+48+0 -name Herrie -T Herrie -e herrie &"
+   "Mixer"			f.exec "xterm -g 128x50+48+0 -T Mixer -e alsamixer &"
+   "MPlayer"			f.exec "xterm -g 128x50+48+0 -name mplayer -T mplayer &"
+   "Radio"			f.exec "xterm -g 128x50+48+0 -name Radio -T Radio &"
+   "Eject CD"			f.exec "/bin/eject /dev/sr0"	
+}
+
+##
+# NETWORK:
+
+menu "Network" {
+   "Network"	f.title
+   "Browsers"		f.menu "Browsers"
+   "Transmission"		f.exec "xterm -g 128x50+48+0 -name transmission -T transmission &"
+   "Email"			f.exec "xterm -g 128x50+48+0 -T email -e alpine -passfile ~/Dropbox/openbox/openbox-config/.alpine-passfile &"
+   "Gftp"			f.exec "gftp -g 128x50+48+0 &"
+   "ICQ"			f.exec "xterm -g 128x50+48+0 -T icq -e finch &"
+   "IRC"			f.exec "xterm -g 128x50+48+0 -T irc -e irssi &"
+   "LQ: Slackware"		f.exec "xulrunner ~/Dropbox/openbox/conkeror/application.ini http://www.linuxquestions.org/questions/slackware-14/ &"
+   "RSS"			f.exec "xterm -g 128x50+48+0 -T rss -e newsbeuter &"
+   "Teamviewer"			f.exec "teamviewer &"
+   "Twitter"			f.exec "xterm -g 128x50+48+0 -T twitter -e ~/Dropbox/openbox/code/perl/ttytter/twitter -ansi -verify -vcheck -dmpause=0 -urlopen='xulrunner ~/Dropbox/openbox/conkeror/application.ini %U 2> /dev/null'  &"
+   "Usenet"			f.exec "xterm -g 128x50+48+0 -T usenet -e alpine -passfile ~/Dropbox/openbox/openbox-config/.alpine-passfile &"
+}
+
+##
+# OFFICE:
+
+menu "Office" {
+   "Office"	f.title
+   "Abiword"			!"abiword &"
+   "Calculator (HP)"		!"xcalc -rpn -geometry 246x142-0+75 &"
+   "Calculator (TI)"		!"xcalc &"
+   "Task"			f.exec "xterm -g 128x50+48+0 -T task -e 'task calendar' &"
+   "Wordgrinder"		f.exec "xterm -g 128x50+48+0 -name wordgrinder -T wordgrinder -e wordgrinder &"
+}
+
+##
+# PREFERENCES:
+
+menu "Preferences" {
+   "Preferences" 	f.title
+   "Ctrl <-> Caps Lock" 	!"xmodmap /usr/local/lib/X11/xmod.ctrl"
+   "Backspace --> Del" 		!"xmodmap /usr/local/lib/X11/xmod.del"
+   "Disable Caps Lock" 		!"xmodmap .xmod.nocaps"
+   "Bell Loud"		("HotPink":"bisque")	!"xset b 80&"
+   "Bell Normal"	("HotPink":"bisque")	!"xset b on&"
+   "Bell Off"		("HotPink":"bisque")	!"xset b off&"
+   "Click Loud"		("HotPink":"azure")	!"xset c 80&"
+   "Click Normal"	("HotPink":"azure")	!"xset c on&"
+   "Click Off "		("HotPink":"azure")	!"xset c on&"
+   "Lock On"					!"xset led on&"
+   "Lock Off"					!"xset led off&"
+   "Mouse Fast"		("HotPink":"gold")	!"xset m 4 2 &"
+   "Mouse Normal"	("HotPink":"gold")	!"xset m 2 5 &"
+   "Mouse Slow"		("HotPink":"gold")	!"xset m 1 1 &"
+   "Hide Icon Manager"		f.hideiconmgr
+   "Show Icon Manager"		f.showiconmgr
+}
+
+##
+# SHELLS:
+
+menu "Shells" {
+   "Shells" 	f.title
+   "bash "	!"xterm -name bash -title bash -e bash &"
+   "console"	("white" : "darkgreen") !"xterm -geom 128x50+48+0 -C -sb \
+	-title Console -name Console &"
+   "csh  "	!"xterm -name csh  -title csh  -e csh &"
+   "ksh  "	!"xterm -name ksh  -title ksh -e ksh &"
+   "mcs  "	!"xterm -g 128x50+48+0 -name minecraft-server -T minecraft-server &"
+   "screen"	!"xterm -g 128x50+48+0 -name screen -T screen &"
+   "sh   "	!"xterm -name sh   -title sh -e sh &"
+   "ssh  "	!"xterm -g 128x50+48+0 -name rebelCode -T rebelCode &"
+   "tcsh "	!"xterm -name tcsh -title tcsh -e tcsh &"
+   "tcsh 48"	!"xterm -g 80x48   -title 'tcsh 48' -e tcsh &"
+   "xterm"	f.exec "xterm -g 128x50+48+0 &"
+   "zsh  "	!"xterm -name zsh  -title zsh -e zsh &"
+   "root"	("black" : "LimeGreen") !"xterm -geometry 128x50+48+0 -name root -title root -bd LimeGreen -e 'su -' &"
+}
+
+menu "System" {
+   "System"	f.title
+   "Battery"			!"xterm -g 32x5+850+580 -name battery -T battery -e sh ~/Dropbox/openbox/code/shell/battery.sh &"
+   "Dropbox"			f.exec "dropboxd &"
+   "Hostname"   		f.exec "xhostname &"
+   "Htop"			f.exec "xterm -g 128x50+48+0 -name htop -T htop -e htop &"
+   "Load Average"		!"xload -geometry 128x50+48+0 &"
+   "System Tray"   		f.exec "stalonetray &"
+   "Xfontsel"   		f.exec "xfontsel &"
+}
+
+##
+# TOOLS:
+
+menu "Tools" {
+   "Tools"			f.title
+   "Big Clock"			!"xclock -g 200x200+120+60 -update 1 &"
+   "Clock"			!"xclock -chime &"
+   "Magnifier"			!"xmag &"
+   "Magnifier (2X)"		!"xmag -mag 2 &"
+   "Magnifier (128 bits)"	!"xmag -source 128x128 &"
+   "Print Window" 		f.exec "xdpr -device ps &"
+   "Unclutter"			f.exec "unclutter -root &"
+   "Watch Print Queue"		f.exec "xterm -g 85x38 -e lpq + &"
+}
+
+##
+# WINDOW MANAGER FUNCTIONS:
+
+menu "Window Manager" {
+   "Window Manager"  f.title
+   "Hide Icon Manager"		f.hideiconmgr
+   "Show Icon Manager"		f.showiconmgr
+   "Sort Icon Manager"		f.sorticonmgr
+   "Button 1"			f.exec "xgrep ^Button1 .twmrc "
+   "Button 2"			f.exec "xgrep ^Button2 .twmrc "
+   "Button 3"			f.exec "xgrep ^Button3 .twmrc "
+   "Reinitialize TWM"		f.twmrc
+   "TWM Version"		f.version
+   "Reinitialize X Resources"	!"xrdb $HOME/.Xdefaults"
+   "Exit TWM"			f.menu "Exit TWM"
+}
+

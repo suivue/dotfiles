@@ -1,0 +1,42 @@
+# ~/.conkyrc
+background no
+use_xft yes
+xftfont Calibri:pixelsize=12
+xftalpha 0.8
+update_interval 1.0
+total_run_times 0
+
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual = true
+
+double_buffer yes
+minimum_size 950 4
+draw_shades no
+draw_outline no
+draw_borders false
+
+draw_graph_borders yes
+stippled_borders no
+border_width 0
+
+border_inner_margin 3
+
+default_color grey
+
+alignment top_middle
+gap_x 4
+gap_y 2
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 2
+override_utf8_locale no
+pad_percents 2
+use_spacer left
+
+
+TEXT
+Uptime: ${color white}$uptime_short $color Proc: ${color white}$processes $color Threads:${color white}$running_threads $color Load: ${color white} $Loadavg $color Cpu: ${color white}$cpu% $color Freq GHz: ${color white} $freq_g $color Mem: ${color white}$mem / $memmax $memperc% $color Disc: ${color white} ${fs_size /} $color Free: ${color white} ${fs_free /} $color Used: ${color white} ${fs_used /} $color Net-In: ${downspeedgraph wlan0 8,30}  Net-Out: ${upspeedgraph wlan0 8,30} $color Total In:${color white} ${totaldown wlan0} $color Total Out:${color white} ${totalup wlan0} $color Date: ${color white}${time %d-%m-%y} $color Time: ${color white}${time %H}:${time %M}:${time %S}         

@@ -1,0 +1,392 @@
+# ~/.twmrc                                                          -*-conf-*-
+
+# Colors aka Theme :)
+Color
+{
+    DefaultBackground "Teal"
+    DefaultForeground "gray70"
+    BorderColor "grey"
+    TitleBackground "Teal"
+    TitleForeground "gray85"
+    MenuBackground "Teal"
+    MenuForeground "gray85"
+    MenuTitleBackground "gray70"
+    MenuTitleForeground "Teal"
+    IconBackground "Teal"
+    IconForeground "gray85"
+    IconBorderColor "gray85"
+    IconManagerBackground "Teal"
+    IconManagerForeground "gray85"
+}
+
+Monochrome
+{
+    IconManagerHighlight  "white"
+    BorderColor "black"
+}
+
+#xsetroot -solid teal
+
+Pixmaps
+{
+    TitleHighlight "dimple1"
+}
+
+# Fonts
+#TitleFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+#MenuFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
+# Comma separated list of fonts accepted
+TitleFont "-*-lucida-*-r-*-*-12-*-*-*-*-*-*-*,-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+ResizeFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*"
+MenuFont "-*-lucida-medium-r-*-*-12-*-*-*-*-*-*-*,-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
+IconFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
+IconManagerFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*"
+
+# Icons and titlebar decoration
+IconDirectory "/home/suser/.twm/icons"  # Directory for non-default icons
+#LeftTitleButton "menu12" = f.menu "windowmenu" # add a menu to each window
+LeftTitleButton "resize.xbm" = f.resize
+RightTitleButton "minimize.xbm" = f.iconify
+RightTitleButton "maximize.xbm" = f.fullzoom
+RightTitleButton "close.xbm" = f.delete
+
+# Window decorations
+BorderWidth		2	# No. of pixels for border around entire window
+FramePadding		3	# No. of pixels between titlebar buttons & frame
+#TitleButtonBorderWidth	0	# No. of pixels for button border
+TitlePadding		5	# No. of pixels around title buttons
+ButtonIndent		0	# Larger seems to squash buttons together
+MenuBorderWidth		1	# No. of pixels for menu border
+#NoMenuShadows			# No shadow behind the menu
+
+# No defaults
+NoDefaults
+NoGrabServer             # don't grab server during menus, etc.
+RestartPreviousState     # reiconify iconified things on startup
+DecorateTransients       # put titlebars on transients
+OpaqueMove               # actually move window instead of outline
+NoRaiseOnMove            # allow moving under other windows
+NoRaiseOnResize          # allow resizing under other windows
+RandomPlacement          # determine window placement automatically
+UsePPosition "on"        # use program-specified size hints accepted
+NoSaveUnders             # faster to just repaint then save
+NoHighlight              # do not highlight (dots around) borders with focus
+NoTitleHighlight         # do not highlight (dotted mesh) titlebars with focus
+AutoRelativeResize       # don't require resize to cross border to start
+#SqueezeTitle		 # 'auto-fit' title like BeOS or Haiku
+
+#
+# Key bindings
+# Button1=left, Button2=middle, Button3=right, m=alt, c=ctrl, s=shift
+# 
+Button1 =  : root  : f.menu "RootMenu"    # was 'twmops' in default file
+Button2 =  : root  : f.menu "System"      # was 'windowops' in default file
+Button3 =  : root  : f.menu "TwmWindows"  # this _has_ to be 'TwmWindows' (?)
+
+DefaultFunction f.nop       # ignore extraneous events
+
+# Left click the window title to lower/raise + gain focus or move
+# Movedelta 1
+# Button1 =  : title : f.function "raise-lower-move"
+# Function "raise-lower-move" { f.move f.raiselower }
+#
+
+MoveDelta 3                 # need to move this much before takes effect
+Function "move-or-raise"    # simulate uwm action
+{
+    f.move
+    f.deltastop
+    f.raise
+}
+
+# Left click the window title to lower / raise + gain focus or move
+Button1 = : title : f.function "move-or-raise"
+#Button2 = : title : f.delete
+# Middle click the window title for options for individual windows
+Button2 =       : title                         : f.menu "windowmenu"
+# Right click window title to resize the window by mousing beyond frame
+Button3 =       : title                         : f.resize
+
+# Click to focus (works but then disables action set for click on 'title')
+# adding 'frame' like 'title|frame' fixed the issue (?!)
+#Button1 = : window : f.raise
+
+# Iconify or minimize
+Button1 =       : icon                          : f.iconify
+Button1 =       : iconmgr                       : f.iconify
+
+# Hold alt key and left click to move entire window
+Button1 = m     : window|icon|frame|title       : f.function "move-or-raise"
+# Hold shift key and right click / move to resize. Best near edges than centre.
+#Button3 = s     : window|icon|frame|title       : f.resize
+# Overrides xterm's keybinding where c+left_click shows its menu
+#Button1 = c     : window			: f.function "move-or-raise"
+
+# following two seem to toggle windows of same class much like Alt+~ 
+#"Tab" = m : all : f.warpring "next"
+#"Tab" = s : all : f.warpring "prev"
+# following two work
+"Tab" = m : all : f.circleup
+"Tab" = s : all : f.circledown
+# 
+"F11" = m : all : f.fullzoom
+"F2"  = m : all : f.exec "fbrun &"
+
+# Hold Alt plus left click window title to maximize window vertically
+#Button1 = m : title|frame : f.zoom
+
+# Hold Alt plus right click window title to maximize window horizontally
+#Button3 = m : title|frame : f.horizoom
+
+#
+# Remove title on some programs like clock
+#
+NoTitle                         # little programs that look like icons
+{
+    "xclock"
+    "xbiff"
+    "xload"
+    "TWM Icon Manager"
+    "xcutsel"
+    "fbrun"
+    "conky"
+}
+
+#
+# Window Ring
+#
+WindowRing                      # f.warpring acts along these windows
+{
+    "xterm"
+    "emacs"
+    "Minefield"
+    "Iceweasel"
+    "Evince"
+    "xpdf"
+    "xdvi"
+}
+
+#
+# Menus
+#
+menu "RootMenu"
+{
+    "TWM Menu"          f.title
+    "Xterm"             !"xterm &"
+    "Web Browser"       !"firefox &"
+    "File Manager"      !"rox &"
+#   ""			f.nop  # original nop
+    "-------------"     f.nop
+    "Applications"      f.menu "xdg_menu-Applications"
+    "Development"       f.menu "xdg_menu-Development"
+    "Education"         f.menu "xdg_menu-Education"
+    "Graphics"          f.menu "xdg_menu-Graphics"
+    "Internet"          f.menu "xdg_menu-Internet"
+    "Multimedia"        f.menu "xdg_menu-Multimedia"
+    "Office"            f.menu "xdg_menu-Office"
+    "Science"           f.menu "xdg_menu-Science"
+    "System"            f.menu "xdg_menu-System"
+    "Utilities"         f.menu "xdg_menu-Utilities"
+    "-------------"     f.nop
+    "Run"	        !"fbrun &"
+    "-------------"     f.nop
+    "Kill"              f.menu "kill"
+    "Restart Twm"       f.restart
+    "Exit Twm"          f.quit
+#    "Logout"            f.warpto "xlogout"
+}
+
+menu "System"
+{
+    "Windows"           f.title
+    "Kill"              f.menu "kill"
+    "Save"              f.saveyourself
+    "Refresh"           f.refresh
+    ""                  f.nop
+    "Iconify"           f.iconify
+    "Resize"            f.resize
+    "Move"              f.move
+    "Raise"             f.raise
+    "Lower"             f.lower
+    "Info"              f.identify
+    "Focus"             f.focus
+    "Unfocus"           f.unfocus
+    ""                  f.nop
+    "Show Iconmgr"      f.showiconmgr
+    "Hide Iconmgr"      f.hideiconmgr
+    "Prev Iconmgr"      f.previconmgr
+    "Next Iconmgr"      f.nexticonmgr
+    "Restart Twm"       f.restart
+    "Exit Twm"          f.quit
+}
+
+menu "windowmenu"
+{
+    "Iconify"           f.iconify
+    "RaiseLower"        f.raiselower
+    "Refresh"           f.winrefresh
+    "Focus"             f.focus
+    ""                  f.nop
+    "Kill"              f.menu "kill"
+}
+
+menu "kill"
+{
+    "Send Delete"       f.delete
+    "Kill Window"       f.destroy
+}
+
+menu "xdg_menu-Applications" {
+    "Applications"      f.title
+    "ARandR" f.exec "arandr&"
+    "About Me" f.exec "/usr/bin/mugshot&"
+    "Bluetooth Manager" f.exec "blueman-manager&"
+    "Customize Look and Feel" f.exec "lxappearance&"
+    "Desktop" f.exec "pcmanfm-qt --desktop-pref=general&"
+    "Desktop Preferences" f.exec "pcmanfm --desktop-pref&"
+    "File Manager Settings" f.exec "thunar-settings&"
+    "IcedTea-Web Control Panel" f.exec "/usr/bin/itweb-settings.itweb.sh&"
+    "IcedTea-Web Policy Editor" f.exec "/usr/bin/policyeditor.itweb.sh&"
+    "Keyboard and Mouse" f.exec "lxinput&"
+    "Monitor Settings" f.exec "lxrandr&"
+    "Picom Configuration" f.exec "picom-conf&"
+    "Power Manager" f.exec "xfce4-power-manager-settings&"
+    "Removable Drives and Media" f.exec "thunar-volman-settings&"
+    "Restore Panel Defaults" f.exec "xfce4-panel-restore-defaults&"
+    "Tint2 Settings" f.exec "tint2conf&"
+    "XScreenSaver" f.exec "xscreensaver&"
+    "XScreenSaver Settings" f.exec "xscreensaver-settings&"
+    "Xfce Terminal Settings" f.exec "xfce4-terminal --preferences&"
+}
+
+menu "xdg_menu-Development" {
+    "Development" f.title
+    "GTK Demo" f.exec "gtk4-demo&"
+    "Geany" f.exec "geany &"
+    "Git Gui" f.exec "git gui&"
+    "Icon Browser" f.exec "gtk4-icon-browser&"
+    "Node Editor" f.exec "gtk4-node-editor&"
+    "Print Editor" f.exec "gtk4-print-editor &"
+    "Widget Factory" f.exec "gtk4-widget-factory&"
+}
+
+menu "xdg_menu-Education" {
+    "Education" f.title
+    "LibreOffice Math" f.exec "libreoffice --math &"
+}
+
+menu "xdg_menu-Graphics" {
+    "Graphics" f.title
+    "Color Chooser" f.exec "gcolor2&"
+    "Document Scanner" f.exec "simple-scan&"
+    "GIMP" f.exec "gimp-2.10 &"
+    "LXImage-Qt" f.exec "lximage-qt &"
+    "LibreOffice Draw" f.exec "libreoffice --draw &"
+    "Mupdf-GL" f.exec "mupdf-gl &"
+    "Ristretto Image Viewer" f.exec "ristretto &"
+    "ScreenGrab" f.exec "screengrab&"
+    "Viewnior" f.exec "viewnior &"
+    "mtPaint" f.exec "mtpaint &"
+}
+
+menu "xdg_menu-Internet" {
+    "Internet" f.title
+    "Claws Mail" f.exec "claws-mail &"
+    "Dillo" f.exec "dillo &"
+    "Firefox" f.exec "firefox &"
+    "HexChat" f.exec "hexchat --existing &"
+    "Pidgin" f.exec "pidgin&"
+    "TigerVNC Viewer" f.exec "/usr/bin/vncviewer-tigervnc&"
+    "uGet" f.exec "env GDK_BACKEND=x11 uget-gtk &"
+}
+
+menu "xdg_menu-Multimedia" {
+    "Multimedia" f.title
+    "Brasero" f.exec "brasero &"
+    "Cheese" f.exec "cheese&"
+    "Parole Media Player" f.exec "parole &"
+    "PulseAudio Volume Control" f.exec "pavucontrol&"
+    "PulseAudio Volume Control" f.exec "pavucontrol-qt&"
+    "Videos" f.exec "totem &"
+}
+
+menu "xdg_menu-Office" {
+    "Office" f.title
+    "AbiWord" f.exec "abiword &"
+    "Atril Document Viewer" f.exec "atril &"
+    "Dictionary" f.exec "xfce4-dict&"
+    "Gnumeric" f.exec "gnumeric &"
+    "LibreOffice" f.exec "libreoffice &"
+    "LibreOffice Base" f.exec "libreoffice --base &"
+    "LibreOffice Calc" f.exec "libreoffice --calc &"
+    "LibreOffice Draw" f.exec "libreoffice --draw &"
+    "LibreOffice Impress" f.exec "libreoffice --impress &"
+    "LibreOffice Math" f.exec "libreoffice --math &"
+    "LibreOffice Writer" f.exec "libreoffice --writer &"
+}
+
+menu "xdg_menu-Science" {
+    "Science" f.title
+    "Gnumeric" f.exec "gnumeric &"
+    "LibreOffice Math" f.exec "libreoffice --math &"
+}
+
+menu "xdg_menu-System" {
+    "System" f.title
+    "Advanced Network Configuration" f.exec "nm-connection-editor&"
+    "Ark" f.exec "ark &"
+    "Bulk Rename" f.exec "thunar --bulk-rename &"
+    "Crashed Processes Viewer" f.exec "drkonqi-coredump-gui&"
+    "File Manager PCManFM" f.exec "pcmanfm &"
+    "Htop" f.exec "xterm -e htop&"
+    "LXTerminal" f.exec "lxterminal&"
+    "LightDM GTK+ Greeter settings" f.exec "lightdm-gtk-greeter-settings-pkexec&"
+    "Midnight Commander" f.exec "xterm -e mc&"
+    "Print Settings" f.exec "system-config-printer&"
+    "QTerminal" f.exec "qterminal&"
+    "QTerminal drop down" f.exec "qterminal --drop&"
+    "Task Manager" f.exec "lxtask&"
+    "Task Manager" f.exec "xfce4-taskmanager&"
+    "Thunar File Manager" f.exec "thunar &"
+    "Welcome" f.exec "/usr/bin/opensuse-welcome&"
+    "XTerm" f.exec "xterm&"
+    "Xfce Terminal" f.exec "xfce4-terminal&"
+    "YaST" f.exec "/usr/bin/xdg-su -c /sbin/yast2&"
+    "YaST Software" f.exec "/usr/lib/YaST2/bin/sw_single_wrapper &"
+    "conky" f.exec "conky --daemonize --pause=1&"
+}
+
+menu "xdg_menu-Utilities" {
+    "Utilities" f.title
+    "Application Finder" f.exec "xfce4-appfinder&"
+    "Ark" f.exec "ark &"
+    "Bulk Rename" f.exec "thunar --bulk-rename &"
+    "Catfish File Search" f.exec "catfish&"
+    "FeatherPad" f.exec "featherpad &"
+    "File Manager PCManFM" f.exec "pcmanfm &"
+    "GNOME Character Map" f.exec "gucharmap&"
+    "Galculator" f.exec "galculator&"
+    "LXQt File Archiver" f.exec "lxqt-archiver &"
+    "Leafpad" f.exec "leafpad &"
+    "LightDM GTK+ Greeter settings" f.exec "lightdm-gtk-greeter-settings-pkexec&"
+    "Openbox Configuration Manager" f.exec "obconf &"
+    "PCManFM-Qt File Manager" f.exec "pcmanfm-qt &"
+    "Passwords and Keys" f.exec "seahorse &"
+    "Screenshot" f.exec "xfce4-screenshooter&"
+    "Thunar File Manager" f.exec "thunar &"
+    "picom" f.exec "picom&"
+}
+
+menu "xdg_menu" {
+    "openSUSE Menu" f.title
+    "Applications" f.menu "xdg_menu-Applications"
+    "Development" f.menu "xdg_menu-Development"
+    "Education" f.menu "xdg_menu-Education"
+    "Graphics" f.menu "xdg_menu-Graphics"
+    "Internet" f.menu "xdg_menu-Internet"
+    "Multimedia" f.menu "xdg_menu-Multimedia"
+    "Office" f.menu "xdg_menu-Office"
+    "Science" f.menu "xdg_menu-Science"
+    "System" f.menu "xdg_menu-System"
+    "Utilities" f.menu "xdg_menu-Utilities"
+}

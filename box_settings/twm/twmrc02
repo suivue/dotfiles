@@ -1,0 +1,241 @@
+#**********************************************************************
+#
+#    .twmrc
+#
+#**********************************************************************
+
+
+UsePPosition "on"		# use program-specified size hints accepted
+NoHighlight			# do not flash borders on enter events
+OpaqueMove			# actually move window instead of outline
+AutoRelativeResize		# don't require resize to cross border to start
+RestartPreviousState		# reiconify iconified things on startup
+ClientBorderWidth		# use the application border width on frame
+BorderWidth 2			# width of top level windows created by twm
+NoGrabServer			# don't grab server during menus, etc.
+NoRaiseOnMove			# allow moving under other windows
+NoRaiseOnResize 		# allow resizing under other windows
+NoTitleFocus			# avoid keystrokes in wrong window cause of lag
+# DecorateTransients		# put titlebars on transients
+# NoBackingStore                # don't request backing store for menus
+
+TitleFont       "-*-helvetica-bold-o-normal-*-14-*-*-*-*-*-*-*"
+MenuFont        "-*-helvetica-bold-r-normal-*-12-*-*-*-*-*-*-*"
+IconFont        "-*-helvetica-bold-o-normal-*-14-*-*-*-*-*-*-*"
+IconManagerFont "-*-helvetica-bold-o-normal-*-14-*-*-*-*-*-*-*"
+ResizeFont      "-*-helvetica-bold-r-normal-*-18-*-*-*-*-*-*-*"
+
+NoSaveUnders			# faster to just repaint then save
+XORvalue 1			# tend to use visually distinct adjacent colors
+# ConstrainedMoveTime 0		# turn off horizontal/vertical only moving
+NoCaseSensitive			# turn off case-sensitivity in sorting icons
+WarpUnmapped			# allow warping to unmapped windows
+InterpolateMenuColors           # turn on smooth color changes in menus
+
+#NoIconManagers                  # I don't like them, so there
+Zoom 32                         # gratuitous video effect
+
+###############################################################################
+#                                                                             #
+#                           Declare some nice colors                          #
+#                                                                             #
+###############################################################################
+
+
+Color
+{
+    DefaultBackground "maroon"
+    DefaultForeground "gray85"
+    BorderColor "white"
+    TitleBackground "maroon"
+    TitleForeground "gray85"
+    MenuBackground "maroon"
+    MenuForeground "gray85"
+    MenuTitleBackground "gray70"
+    MenuTitleForeground "maroon"
+    IconBackground "#503000"
+    IconForeground "gray85"
+    IconBorderColor "gray85"
+    IconManagerBackground "maroon"
+    IconManagerForeground "gray85"
+}
+
+Monochrome
+{
+    IconManagerHighlight  "white"
+    BorderColor "gray"
+}
+
+
+###############################################################################
+#                                                                             #
+#                             Define key bindings                             #
+#                                                                             #
+###############################################################################
+
+MoveDelta 3			# need to move this much before takes effect
+
+Function "move-or-raise"	# simulate uwm action
+{
+    f.move
+    f.deltastop
+    f.raise
+}
+
+Function "move-or-iconify"
+{
+        f.move
+        f.deltastop
+        f.iconify
+}
+
+Function "move-and-raise"
+{
+    f.raise
+    f.move
+}
+
+
+Function "logout"
+{
+    f.warpto "login"
+    f.deltastop
+    f.destroy
+}
+
+
+
+DefaultFunction f.nop		# ignore extraneous events
+
+Button1 =	: title				: f.function "move-or-raise"
+Button1 =	: icon                          : f.function "move-or-iconify"
+Button1 =	: iconmgr			: f.iconify
+Button1 = 	: root  			: f.menu "commands"
+Button1 = m	: all				: f.menu "commands"
+Button2	= 	: icon|title|frame		: f.iconify
+Button2	= m	: window|icon|frame|title	: f.iconify
+Button3	= 	: icon|frame|title	        : f.function "move-and-raise"
+Button3	= m	: window|icon|frame|title	: f.function "move-and-raise"
+Button1	= c|m	: all				: f.refresh
+
+
+IconManagerDontShow		# but ignore these windows
+{
+  "xclock"
+  "xbiff"
+  "xload"
+  "oclock"
+  "xcutsel"
+  "XCalendar"
+  "xlogout"
+}
+
+NoTitle				# little programs that look like icons
+{
+  "xclock"
+  "xbiff"
+  "xload"
+  "oclock"
+  "xcutsel"
+  "XCalendar"
+  "xeyes"
+  "xlogout"
+}
+
+# WindowRing			# f.warpring acts along these windows
+# {
+#     "XTerm"
+#     "emacs"
+#     "Xmh"
+# }
+
+
+###############################################################################
+#                                                                             #
+#                          Define some useful menus.                          #
+#                                                                             #
+###############################################################################
+
+
+menu "commands"
+{
+"COMMANDS"		f.title
+"Rlogin..."  		("blue4":"white") f.menu "rlogins"
+"Toys..."		f.menu "toys"
+"System..."             f.menu "system"
+"Windows..."            f.menu "TwmWindows"
+""                      f.nop
+"xterm"                 !"xterm                       -n local &"
+"xterm (80x40)"         !"xterm -geom 80x40           -n local &"
+"xterm (80x65)"         !"xterm -geom 80x65  -fn 8x13 -n local &"
+"xterm (132x80)"        !"xterm -geom 132x80 -fn 6x10 -n local &"
+""                      f.nop
+"Resize"                f.resize
+"Move"                  f.move
+"Lower"                 f.lower
+"Raise"                 f.raise
+"(De)Iconify"           f.iconify
+"Refresh"               f.refresh
+"Info"                  f.identify
+"Delete Window" 	f.delete
+"Kill Window"	("FireBrick":"#3090d0")	f.destroy
+}
+
+menu "system"   
+{
+"Edit .twmrc"   ("white":"#b03020")        !"emacs -fg lightgrey -cr lightgrey -bg '#5000a0' -display $DISPLAY -font 9x15 $HOME/.twmrc &"
+"Edit .Xresources"   !"emacs -fg lightgrey -cr lightgrey -bg '#5000a0' -display $DISPLAY -font 9x15 $HOME/.Xresources &"
+"Edit .xsession"     !"emacs -fg lightgrey -cr lightgrey -bg '#5000a0' -display $DISPLAY -font 9x15 $HOME/.xsession &"
+""			f.nop
+"Restart Twm"		f.restart
+"Exit Twm"		f.quit
+""			f.nop
+"Reload resource file" ("white":"#d07070") !"xrdb <$HOME/.Xresources"
+}
+
+menu "rlogins"
+{
+"eniac"    ("white":"#10b060") !"rsh eniac.seas.upenn.edu xterm -n eniac -display $DISPLAY -fg black -cr black -bg paleturquoise3 &"
+"eniac:connect" !"rsh -l connect eniac.seas.upenn.edu /usr/local/bin/xterm -n CONNECT -ls -sb -display $DISPLAY -fg black -cr black -bg paleturquoise3 &"
+"pender" !"rsh pender.ee xterm -n pender -ls -sb -display $DISPLAY -fg black -cr black -bg paleturquoise3 &" 
+""	    f.nop
+"grad1"	 !"rsh grad1.cis.upenn.edu xterm -n grad1 -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &"
+"gradient"  !"rsh gradient.cis.upenn.edu xterm -n gradient -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &" 
+"linc"  !"rsh linc.cis.upenn.edu xterm -n linc -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &" 
+"dsl"  !"rsh dsl.cis.upenn.edu xterm -n dsl -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &" 
+""	    f.nop
+"midnight" !"rsh midnight.seas.upenn.edu xterm -n midnight -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &"
+"research" !"rsh research.seas.upenn.edu xterm -n research -ls -sb -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &" 
+"pixmap"   !"rsh pixmap.seas.upenn.edu xterm -n pixmap -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &"
+"widget"   !"rsh widget.seas.upenn.edu xterm -display $DISPLAY -n widget -fg black -cr black -bg paleturquoise3 -ls -sb &"
+"stipple"  !"rsh stipple.seas.upenn.edu xterm -n stipple -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &"
+"purgatory"  !"rsh purgatory.seas.upenn.edu xterm -n purgatory -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &"
+"camelot"  ("white":"#80d090") !"rsh camelot.seas.upenn.edu xterm -n camelot -display $DISPLAY -fg black -cr black -bg paleturquoise3 -ls -sb &"
+}
+
+menu "toys"
+{
+"xbiff" ("white":"#802080") !"rsh eniac.seas.upenn.edu xbiff -display $DISPLAY -fg red -bg black &"
+"xload" f.menu "xloads"
+"xcalc" !"rsh eniac.seas.upenn.edu xcalc -display $DISPLAY -fg red -bg black &"
+"xeyes" ("white":"#804080") !"rsh eniac.seas.upenn.edu xeyes -display $DISPLAY &"
+}
+
+menu "xloads"
+{
+"eniac"    ("white":"#30d090") !"rsh eniac.seas.upenn.edu xload -display $DISPLAY -fg black  -bg paleturquoise3 &"
+"pender"    ("white":"#30d090") !"rsh pender.ee xload -n pender -ls -sb -display $DISPLAY -fg black -cr black -bg paleturquoise3 &" 
+""	    f.nop
+"grad1"	    ("white":"#30d090") !"rsh grad1.cis.upenn.edu xload -n grad1 -display $DISPLAY -fg black -cr black -bg paleturquoise3 &"
+"gradient"  ("white":"#30d090") !"rsh gradient.cis.upenn.edu xload -n gradient -display $DISPLAY -fg black -cr black -bg paleturquoise3 &" 
+"dsl"  ("white":"#30d090") !"rsh dsl.cis.upenn.edu xload -n dsl -display $DISPLAY -fg black -cr black -bg paleturquoise3 &" 
+""	    f.nop
+"midnight"  ("white":"#30d090") !"rsh midnight.seas.upenn.edu xload -n midnight -display $DISPLAY -fg black -cr black -bg paleturquoise3 &"
+"pixmap"    ("white":"#30d090") !"rsh pixmap.seas.upenn.edu xload -n pixmap -display $DISPLAY -fg black -cr black -bg paleturquoise3 &"
+"widget"    ("white":"#30d090") !"rsh widget.seas.upenn.edu xload -display $DISPLAY -n widget -fg black -cr black -bg paleturquoise3 &"
+"stipple"   ("white":"#30d090") !"rsh stipple.seas.upenn.edu xload -n stipple -display $DISPLAY -fg black -cr black -bg paleturquoise3 &"
+"purgatory"    ("white":"#30d090") !"rsh purgatory.seas.upenn.edu xload -n purgatory -display $DISPLAY -fg black -cr black -bg paleturquoise3 &"
+"camelot"    ("white":"#30d090") !"rsh camelot.seas.upenn.edu xload -n camelot -display $DISPLAY -fg black -cr black -bg paleturquoise3 &"
+}
+
+

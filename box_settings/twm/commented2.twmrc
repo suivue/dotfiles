@@ -1,0 +1,348 @@
+#**********************************************************************
+#
+#    system.twmrc
+#
+#**********************************************************************
+
+##################################################################
+### Variables Section
+##################################################################
+#
+#  In this section we will set the values for some generic
+#  properties of all windows
+#
+#  First set the colors for parts of the X-window for
+#  both monochrome and color screens.
+###
+Monochrome
+{
+    BorderColor "black"
+    TitleForeground "black"
+    TitleBackground "white"
+    MenuForeground "black"
+    MenuBackground "white"
+    MenuTitleForeground "white"
+    MenuTitleBackground "black"
+    IconForeground "White"
+    IconBackground "black"
+    IconBorderColor "black"
+}
+
+Color
+{
+    BorderColor "Black"
+    TitleForeground "White"
+    TitleBackground "Blue"
+    MenuForeground "white"
+    MenuBackground "Blue"
+    MenuTitleForeground "white"
+    MenuTitleBackground "Black"
+    IconForeground "white"
+    IconBackground "black"
+    IconBorderColor "Black"
+}
+
+###
+#  Now define which cursor will appear as the the mouse
+#  cursor passes over different parts of the X-window
+# 
+#  The cursors are all part of the cursor font and can
+#  be displayed with the command:
+#  xfd -fn cursor
+#  
+#  The list of cursor names can be accessed by looking at
+#  /usr/X11R6/include/X11/cursorfont.h on Spiffy
+#  /usr/lpp/X11/include/X11/cursorfont.h on morgana
+###
+Cursors
+{
+	Frame "sb_up_arrow"
+	Title "sb_up_arrow"
+	Icon "sb_up_arrow"
+	Iconmgr "dot"
+	Menu "sb_left_arrow"
+	Button "sb_up_arrow"
+}
+
+###
+#  Set up your own bitmaps for icons. The 
+#  bitmap defined below will apply to all
+#  xterms when they are iconified and the
+#  bitmap is located in /home/staff/ejd/bitmaps
+#  on spiffy.
+###
+
+Icons
+{
+	"XTerm"		"~/bitmaps/term1"
+	"xterm"		"~/bitmaps/term1"
+}
+
+###
+#  Next are some options taken from the system default
+#  twmrc file most should be left alone. 
+###
+
+NoGrabServer
+NoBackingStore
+NoSaveUnders
+Zoom
+RandomPlacement
+WarpUnmapped
+
+###
+#  The number associated with these can be
+#  changed. for borderless windows use
+#  BorderWidth 0
+#
+#  MoveDelta controls how many pixels the mouse 
+#  must move before a window is actually moved in a
+#  raise and move operation
+###
+BorderWidth 1
+TitleButtonBorderWidth 0
+MoveDelta 5
+
+###
+#  This defines sets of windows which when started
+#  should have the cursor move to them.
+###
+WarpCursor
+{
+    "xterm"
+    "Xterm"
+    "x3270"
+}
+
+###
+#  Define some fonts
+###
+
+TitleFont	"-adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1"
+MenuFont	"-adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1"
+IconFont	"-adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1"
+ResizeFont	"-adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1"
+
+###
+#  Some windows don't need a title bar
+#  List them here
+###
+NoTitle
+{
+    "xclock"
+    "xbiff"
+    "xload"
+}
+
+WindowRing
+{
+    "Xterm"
+    "XTerm"
+}
+
+##################################################################
+### Buttons Section
+##################################################################
+###
+#  Define some functions for later use
+#  Almost anything can go here as long 
+#  as you follow the appropriate format.
+#  You can include your own programs in 
+#  a function, just make sure you use
+#  an absolute path name. See the twm man
+#  page for more info.
+###
+
+Function "move or raise"
+{
+	f.move f.deltastop f.raise
+}
+
+#
+# The DefaultFunction is also a binding, so must be after all other
+# variable assignments.
+
+DefaultFunction	f.beep
+
+###
+#  Now we want to set up what is accessed by pressing 
+#  the mouse buttons. 
+#  Button1 is the left mouse button
+#  Button2 is the middle mouse button
+#  Button3 is the right mouse button
+#  m stands for the meta key (usually 'alt')
+#  c stands for the ctrl key
+#  s stands for the shift key
+#  CONTEXT refers to which window or part of a window
+#          the button press will act upon.
+#  FUNCTION what to execute when the button is pressed
+#
+#  Example:
+#    Looking at the first entry below:
+#      While the cursor is in the root window, press
+#      the left mouse button and the alt and shift key
+#      at the same time.  This will pop up the menu
+#      labeled "button1". This menu is defined in the
+#      next section.
+###
+
+#Button = KEYS	: CONTEXT	: FUNCTION
+
+Button1 = m|s	: root		: f.menu "button1"
+Button2 = m|s	: root		: f.menu "button2"
+Button3 = m|s	: root		: f.menu "button3"
+
+Button1 = m|s	: all		: f.menu "button1"
+Button2 = m|s	: all		: f.menu "button2"
+Button3 = m|s	: all		: f.menu "button3"
+
+Button1 =	: title		: f.raise
+Button2 =	: title		: f.move
+Button3 =	: title		: f.lower
+
+Button1 =	: icon		: f.iconify
+Button2 =	: icon		: f.move
+Button3 =	: icon		: f.lower
+
+Button1 = m	: w|i|t		: f.resize
+Button2 = m	: w|i|t		: f.lower
+Button3 = m	: w|i|t		: f.function "move or raise"
+
+Button1 = m|c	: w|i|t		: f.resize
+Button2 = m|c	: w|i|t		: f.iconify
+Button3 = m|c	: w		: f.identify
+
+##################################################################
+### Function Key Mappings
+##################################################################
+
+# An example is shown of how to map an unmodified
+# function key (F1) to a twm function (f.beep).
+# It is commented out because some users (i.e.
+# of emacs) need to let unmodified function keys
+# get through to the client.
+# "F1" =  	: all		: f.beep
+
+# Function keys with shift key.
+# "F1" = s 	: all		: !"xterm -n `hostname` &"
+# "F5" =		: all		: !"xvideo -x +v"
+# "F6" = 		: all		: !"xvideo -x -v"
+
+# The unmodified cluster of arrow keys are used for
+# window circulation. Some users may prefer to have
+# these keys sent directly to clients (for instance, 
+# editors like emacs or even vi can use them),
+# in which case the following definitions
+# should be commented out or have modifiers added.
+#"Up" =		: w|i|t		: f.raise
+#"Down" =	: w|i|t		: f.lower
+#"Right" =	: all		: f.warpring "next"
+#"Left" =	: all		: f.warpring "prev"
+# Ctrl-Down can be used to iconify.
+#"Down" = c	: w|i|t		: f.iconify
+# Meta-Down will zoom or unzoom a window.
+#"Down" = m	: w		: f.zoom
+# Shift-Meta-Down will fullzoom or unfullzoom a window.
+#"Down" = s|m	: w		: f.fullzoom
+
+##################################################################
+### New Twm Functions
+##################################################################
+
+Function "restart-as-uwm"
+{
+    !"( sleep 2 && twm -f /usr/lib/X11/twm/system.u-twmrc ) &"
+    f.quit
+}
+
+Function "restart-with-system-twmrc"
+{
+    !"( sleep 2 && twm -f /usr/lib/X11/twm/system.twmrc ) &"
+    f.quit
+}
+
+
+##################################################################
+### Menus
+##################################################################
+###
+#  Here we define the menus that were mentioned in the buttons 
+#  section above
+#
+#  The first line of the menu is usually a title.
+#  The following lines refer to a program or function to run.
+#  The text in quotes on the left side is what will appear in 
+#  the menu. On the right is the command or function. For
+#  shell commands you need to use the ! to tell twm that it
+#  is not a built in or defined function but is a shell command
+###
+
+menu "button1"
+{
+"APPLICATIONS"		f.title
+"Load"			!"xload &"
+"Remote Loads"		!"xrload &"
+"Xterm font 8x13bold"	!"xterm -fn 8x13bold -sb &"
+"Xterm font 6x10"	!"xterm -geometry 100x100-10-10 -fn 6x10 -sb&"
+"Fortran Xterm"		!"xterm -geometry 72x60-10-10 -fn 8x13bold -bw 2 -name 'fortran' -n 'fortran'&"
+}
+
+
+menu "button2"
+{
+"SESSION OPERATIONS"	f.title
+"BACKGROUNDS"		f.menu "backgrounds"
+"Restart in twm mode"	f.restart
+"Source .twmrc"		f.restart
+"Kill twm"		f.quit
+}
+
+# There's lots more where these came from. This is just a representative
+# sampling. The best way to have your own default background
+# is to place one of these xsetroot commands in your .xsession.
+# Note that not all of these backgrounds will work on all displays
+# (e.g. X terminals) but they should fail gracefully if they fail.
+
+menu "backgrounds"
+{
+  "BACKGROUNDS"		f.title
+  "black"		!"xsetroot -solid black &"
+  "blue"		!"xsetroot -solid blue &"
+  "violet"		!"xsetroot -solid violet &"
+  "check"		!"xsetroot -mod 3 3 -fg violet -bg black &"
+  "scales"		!"xsetroot -bitmap /usr/include/X11/bitmaps/scales &"
+  "stipple"		!"xsetroot -bitmap /usr/include/X11/bitmaps/stipple &"
+  "gray"		!"xsetroot -bitmap /usr/include/X11/bitmaps/gray &"
+  "default"		!"xsetroot -def &"
+}
+
+menu "button3"
+{
+"WINDOW OPERATIONS"	f.title
+"Move Window"		f.move
+"Resize Window"		f.resize
+"Raise Window"		f.raise
+"Lower Window"		f.lower
+"(De)Iconify"		f.iconify
+"Refresh"		f.refresh
+"Focus on Window"	f.focus
+"Unfocus"		f.unfocus
+"Destroy Window"	f.destroy
+#"FUNCTION KEYS"		f.menu "function-keys"
+}
+
+# Note that this is really intended to be a "read-only menu".
+# It's just a way of providing information to the user, although
+# it can in fact be used to pick operations from.
+menu "function-keys"
+{
+"FUNCTION KEY BINDINGS"			f.title
+"Up:       : w     : f.raise"		f.raise
+"Down:     : w     : f.lower"		f.lower
+"Right:    : all   : f.warpring next"	f.warpring "next"
+"Left:     : all   : f.warpring prev"	f.warpring "prev"
+"Down: c   : w|i|t : f.iconify"		f.iconify
+"Down: m   : w     : f.zoom"		f.zoom
+"Down: s|m : w     : f.fullzoom"	f.fullzoom
+"F1:   s   : all   : xterm"		!"xterm -n `hostname` &"
+}

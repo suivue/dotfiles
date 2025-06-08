@@ -1,0 +1,180 @@
+#
+# dot.twmrc -- twm resource file
+#
+# 2001, 2002  Benedikt Meurer <bmeurer@unix-ag.org>
+#
+
+NoGrabServer
+RestartPreviousState
+DecorateTransients
+TitleFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+ResizeFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+MenuFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+IconFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
+IconManagerFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*"
+BorderWidth 3
+ButtonIndent 2
+NoHighlight
+AutoRelativeResize
+FramePadding 0
+
+# Windows should not be allowed to be moved off the screen
+DontMoveOff
+
+# Show the window contents while moving the window
+OpaqueMove
+
+# windows with no specified geometry should be placed in a pseudo-random
+# location instead of having the user drag out an outline.
+RandomPlacement
+
+# indicates the outlines suggesting movement of a window to and from
+# its iconified state should be displayed whenever a window is iconified
+# of deiconified
+Zoom 50
+
+# list of windows, that should be auto-raise whenever mouse pointer
+# enters the window
+AutoRaise
+{
+	"xterm"
+}
+
+# This is for hiding the ugly menubar in windows who dont need em.
+NoTitle
+{
+    "xlogo"          # a must have :)
+    "xclock"
+    "xsm"
+}
+
+Color
+{
+	BorderColor	"ForestGreen"
+	{
+		"xclock"	"SteelBlue"
+	}
+	DefaultBackground		"ForestGreen"
+	DefaultForeground		"Grey85"
+	TitleBackground		"ForestGreen"
+	TitleForeground		"White"
+	MenuBackground		"grey85"
+	MenuForeground		"DarkRed"
+	MenuTitleBackground		"DarkRed"
+	MenuTitleForeground		"Grey85"
+	IconBackground		"ForestGreen"
+	IconForeground		"Grey80"
+	IconBorderColor		"ForestGreen"
+	IconManagerBackground	"White"
+	IconManagerForeground	"Black"
+	PointerForeground		"NavyBlue"
+	PointerBackground		"White"
+}
+
+#
+# Define some useful functions for motion-based actions.
+#
+MoveDelta 1
+Function "move-or-lower" { f.move f.deltastop f.lower }
+Function "move-or-raise" { f.move f.deltastop f.raise }
+Function "move-or-iconify" { f.move f.deltastop f.iconify }
+
+#
+# Set some useful bindings.  Sort of uwm-ish, sort of
+# simple-button-ish
+#
+Button1 = : root : f.menu "prg"
+Button2 = : root : f.delete
+Button3 = : root : f.menu "window"
+
+Button1 = m : window|icon : f.function "move-or-lower"
+Button2 = m : window|icon : f.iconify
+Button3 = m : window|icon : f.function "move-or-raise"
+
+Button1 = : title : f.function "move-or-raise"
+Button2 = : title : f.raiselower
+Button3 = : title : f.iconify
+
+Button1 = : icon : f.function "move-or-iconify"
+#Button2 = : icon : f.destroy
+Button3 = : icon : f.iconify
+
+Button1 = : iconmgr : f.iconify
+Button2 = : iconmgr : f.destroy
+Button3 = : iconmgr : f.iconify
+
+# This is for the window bar
+#LeftTitleButton  "/usr/X11R6/include/X11/bitmaps/checkmark.xbm"  = f.delete
+#RightTitleButton "/usr/X11R6/include/X11/bitmaps/menu12"  = f.resize
+
+
+#
+# And a menus with the usual things
+#
+menu "prg"
+{
+	"endor"		f.title
+	"xterm"		f.exec "xterm &"
+	""		f.nop
+	"Netscape"	f.exec "communicator &"
+	"Graphics"      f.menu "graphics"
+	"Music"         f.menu "music"
+}
+
+menu "graphics"
+{
+"Graphics"      f.title
+"XV"            f.exec "xv &"
+"Gimp"          f.exec "gimp &"
+"xRes"          f.exec "/home/prg/xRes &"
+"Xpaint"        f.exec "xpaint &"
+}
+
+menu "music"
+{
+"Music"	        f.title
+"X11amp"        f.exec "x11amp &"
+"Workman"       f.exec "workman &"
+"TkMix"         f.exec "tkmix &"
+}
+
+menu "window"
+{
+"X Windows"	f.title
+"Kill Window"	f.destroy
+"Delete Window"	f.delete
+""		f.nop
+"Maximize"	f.fullzoom
+"Minimize"	f.iconify
+""		f.nop
+"Focus"		f.focus
+"Unfocus"	f.unfocus
+"Show Iconmgr"	f.showiconmgr
+"Hide Iconmgr"	f.hideiconmgr
+""		f.nop
+"Redraw"	f.refresh
+"Restart"	f.restart
+"Quit"		f.quit
+}
+
+Icons
+{
+     "XTerm"   "/usr/X11R6/include/X11/bitmaps/terminal.xbm"
+     "x11amp"  "/usr/X11R6/include/X11/bitmaps/xfm_au.xbm"
+}
+
+Cursors
+{
+                         Frame     "left_ptr"
+                         Title     "left_ptr"
+                         Icon      "left_ptr"
+                         IconMgr   "left_ptr"
+                         Move      "fleur"
+                         Resize    "fleur"
+                         Menu      "hand1"
+                         Button    "hand2"
+                         Wait      "clock"
+                         Select    "dot"
+                         Destroy   "pirate"
+}
+

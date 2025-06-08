@@ -1,0 +1,550 @@
+#
+# ~/.twmrc
+#
+# execute in ~/.xinitrc or ~/.xsessions (assumse 1680x1050)
+#         xsetroot -bg black -fg DarkSlateGrey -bitmap /usr/include/X11/bitmaps/grid16
+#         rclock -fg azure3 -bg black -geometry '90x90-0-0' &
+#
+# I use vdesk to simulate multiple desktops, see:
+#       https://offog.org/code/vdesk/
+# 
+#
+
+
+#------------------------------------------------------------------------------
+# Fonts
+#    valid Prefixes:
+#     :##JMCRESOTHERS##
+#     :##JMCRES1024x768##
+#     :##JMCRES1280x960##
+#     :
+#     :##JMCRES1920x1200##
+#------------------------------------------------------------------------------
+#--- terminus sizes for Red Hat: 12 14 16       20 22 24 28 32
+#--- terminus sizes Slackware:   12 14 16 17 18 20 22 24 28 32
+IconManagerFont	"-*-terminus-bold-r-normal-*-16-*-*-*-*-*-*-*"
+TitleFont	"-*-terminus-bold-r-normal-*-18-*-*-*-*-*-*-*"
+IconFont	"-*-terminus-bold-r-normal-*-12-*-*-*-*-*-*-*"
+MenuFont	"-*-terminus-bold-r-normal-*-18-*-*-*-*-*-*-*"
+ResizeFont	"-*-terminus-bold-r-normal-*-22-*-*-*-*-*-*-*"
+
+
+#------------------------------------------------------------------------------
+# other
+#------------------------------------------------------------------------------
+NoGrabServer
+RestartPreviousState
+DecorateTransients
+showiconmanager
+##RandomPlacement
+
+SqueezeTitle
+BorderWidth 2
+MenuBorderWidth 4
+ButtonIndent 2
+IconRegion "1300x100-95-1" SOUTH EAST 75 25
+ForceIcons
+RandomPlacement
+
+Color
+{
+    TitleBackground       "black"
+    TitleForeground       "azure3"
+    BorderColor           "slategrey"
+	{
+		"TWM Icon Manager"	"black"
+		"gxine Icon Manager"	"black"
+		"amarok Icon Manager"	"black"
+		"xmms Icon Manager"	"black"
+		"rhythmbox Icon Manager"	"black"
+	}
+    DefaultBackground     "black"               
+    DefaultForeground     "azure3"              
+    IconBackground        "black"               
+    IconForeground        "azure3"              
+    IconBorderColor       "lightblue"           
+    IconManagerBackground "black"               
+    IconManagerForeground "azure3"              
+    MenuBackground        "black"               
+    MenuForeground        "azure3"              
+    MenuTitleBackground   "azure3"              
+    MenuTitleForeground   "black"               
+    MenuBorderColor       "lightblue"           
+}
+
+
+###############################################################################
+# Other settings
+###############################################################################
+#IconifyByUnmapping
+#{
+#}
+
+NoTitle
+{
+	"xapm"
+	"xload"
+	"rclock"
+	"xeyes"
+	"TWM Icon Manager"
+	"amarok Icon Manager"
+	"xmms Icon Manager"
+	"rhythmbox Icon Manager"
+	"gxine Icon Manager"
+	"xmms"
+	"rhythmbox"
+	"gxine"
+	"xsysinfo"
+}
+
+IconManagerGeometry "150x800-2+1" 1
+IconManagers
+{
+	"amarok" "450x5+0-20" 1
+	"xmms" "450x5+0-20" 1
+	"rhythmbox" "450x5+0-20" 1
+	"gxine" "450x5+0-20" 1
+}
+
+DontIconifyByUnmapping
+{
+	"gkrellm"
+	"conky"
+	"xeyes"
+	"xload"
+	"xsysinfo"
+}
+IconManagerDontShow
+{
+	"gkrellm"
+	"conky"
+	"rclock"
+	"xeyes"
+	"xload"
+	"xsysinfo"
+}
+
+###############################################################################
+# Functions
+###############################################################################
+MoveDelta 3
+Function "move-or-lower" { f.move f.deltastop f.lower }
+Function "move-or-raise" { f.move f.deltastop f.raise }
+Function "move-or-iconify" { f.move f.deltastop f.iconify }
+
+###############################################################################
+# AUTORAISE
+###############################################################################
+AutoRaise
+{
+	"*Gimp*"
+	"*gimp*"
+	"Amarok"
+	"Audacious"
+	"Calendar"
+	"Eterm"
+	"GVim"
+	"Gimp"
+	"IBM Notes"
+	"Kpat"
+	"Kiriki"
+	"Ktorrent"
+	"LyX"
+	"Mozilla-bin"
+	"Navigator"
+	"RightTimeRefeed"
+	"SAP GUI for Java"
+	"TWM Icon Manager"
+	"Thunderbird"
+	"VIM"
+	"Vim"
+	"XGammon"
+	"XNetload"
+	"XTerm"
+	"XbmBrowser"
+	"Xfm"
+	"Xmessage"
+	"Xpdf"
+	"[Aa]marok"
+	"agnclient"
+	"amarok"
+	"aterm"
+	"bitmap"
+	"cbb"
+	"elvis"
+	"emacs"
+	"firefox-bin"
+	"gimp"
+	"gkrellm"
+	"gnome-terminal"
+	"gpicview"
+	"gv"
+	"gvim"
+	"gxine"
+	"ibm-notes9-zap"
+	"ical"
+	"kmail"
+	"kstars"
+	"lavaps"
+	"libreoffice"
+	"lyx"
+	"magnify"
+	"mozilla-bin"
+	"netscape"
+	"rhythmbox"
+	"rxvt"
+	"soffice"
+	"thunderbird-bin"
+	"wmagnify"
+	"xbiff"
+	"xfig"
+	"xless"
+	"xload"
+	"xmms"
+	"xonix"
+	"xpaint"
+	"xsm"
+	"xspacewarp"
+	"xsysinfo"
+	"xterm"
+	"xv"
+}
+
+###############################################################################
+# ICONS
+###############################################################################
+
+ForceIcons
+
+Icons
+{
+    "Emacs"                 "/u/local/3dpixmaps/bitmap/alpha_e.xbm"
+    "agnclient"             "/u/local/3dpixmaps/bitmap/key_dir.xbm"
+    "XTerm"                 "/u/local/3dpixmaps/bitmap/Focus12.xbm"
+    "gnome-terminal"        "/u/local/3dpixmaps/bitmap/Focus12.xbm"
+    "SAP GUI for Java"      "/u/local/3dpixmaps/bitmap/land_castle_2.xbm"
+    "Audacious"             "/u/local/3dpixmaps/bitmap/mini_audio.xbm"
+    "XMMS"                  "/u/local/3dpixmaps/bitmap/mini_audio.xbm"
+    "x11amp"                "/u/local/3dpixmaps/bitmap/mini_audio.xbm"
+    "gnome-calculator"      "/u/local/3dpixmaps/bitmap/mini_calculator.xbm"
+    "gnomecal"              "/u/local/3dpixmaps/bitmap/mini_calendar.xbm"
+    "gnome-cd"              "/u/local/3dpixmaps/bitmap/mini_cd_caddy.xbm"
+    "xmahjongg"             "/u/local/3dpixmaps/bitmap/mini_chip.xbm"
+    "GVim"                  "/u/local/3dpixmaps/bitmap/mini_edit.xbm"
+    "gvim"                  "/u/local/3dpixmaps/bitmap/mini_edit.xbm"
+    "konqueror"             "/u/local/3dpixmaps/bitmap/mini_filing.xbm"
+    "kstars"                "/u/local/3dpixmaps/bitmap/mini_galaxy.xbm"
+    "Ktorrent"              "/u/local/3dpixmaps/bitmap/movie.xbm"
+    "Gradient Selection"    "/u/local/3dpixmaps/bitmap/mini_grainy.xbm"
+    "ibm-notes9-zap"        "/u/local/3dpixmaps/bitmap/mini_lightning_4.xbm"
+    "IBM Notes"             "/u/local/3dpixmaps/bitmap/mini_mail_box.xbm"
+    "Send to Mail"          "/u/local/3dpixmaps/bitmap/mini_mail_box.xbm"
+    "Thunderbird"           "/u/local/3dpixmaps/bitmap/mini_mail_box.xbm"
+    "kmail"                 "/u/local/3dpixmaps/bitmap/mini_mail_box.xbm"
+    "Xmessage"              "/u/local/3dpixmaps/bitmap/mini_message.xbm"
+    "Mozilla-bin"           "/u/local/3dpixmaps/bitmap/mini_network.xbm"
+    "RightTimeRefeed"       "/u/local/3dpixmaps/bitmap/mini_network_graph.xbm"
+    "VTWM Desktop"          "/u/local/3dpixmaps/bitmap/mini_odesk.xbm"
+    "virtualDesktop"        "/u/local/3dpixmaps/bitmap/mini_odesk.xbm"
+    "Brush Selection"       "/u/local/3dpixmaps/bitmap/mini_paint2.xbm"
+    "xpaint"                "/u/local/3dpixmaps/bitmap/mini_palette.xbm"
+    "Color Palette"         "/u/local/3dpixmaps/bitmap/mini_palette2.xbm"
+    "Indexed Color Palette" "/u/local/3dpixmaps/bitmap/mini_palette2.xbm"
+    "The GIMP"              "/u/local/3dpixmaps/bitmap/mini_palette2.xbm"
+    "The Gimp"              "/u/local/3dpixmaps/bitmap/mini_palette2.xbm"
+    "Pattern Selection"     "/u/local/3dpixmaps/bitmap/mini_pattern1.xbm"
+    "Load Image"            "/u/local/3dpixmaps/bitmap/mini_pic_frame.xbm"
+    "New Image"             "/u/local/3dpixmaps/bitmap/mini_pic_frame.xbm"
+    "Save Image"            "/u/local/3dpixmaps/bitmap/mini_pic_frame.xbm"
+    "image_window"          "/u/local/3dpixmaps/bitmap/mini_pic_frame.xbm"
+    "print"                 "/u/local/3dpixmaps/bitmap/mini_printer.xbm"
+    "gnumeric"              "/u/local/3dpixmaps/bitmap/mini_sc.xbm"
+    "kspread"               "/u/local/3dpixmaps/bitmap/mini_sc.xbm"
+    "Screen Shot"           "/u/local/3dpixmaps/bitmap/mini_terminal_say.xbm"
+    "Gnometris"             "/u/local/3dpixmaps/bitmap/mini_tetris.xbm"
+    "Kblocks"               "/u/local/3dpixmaps/bitmap/mini_tetris.xbm"
+    "Xjewel"                "/u/local/3dpixmaps/bitmap/mini_tetris2.xbm"
+    "gnome-dictionary"      "/u/local/3dpixmaps/bitmap/mini_webster_dict.xbm"
+    "abiword"               "/u/local/3dpixmaps/bitmap/mini_words.xbm"
+    "kword"                 "/u/local/3dpixmaps/bitmap/mini_words.xbm"
+    "XGammon"               "/u/local/3dpixmaps/bitmap/mini_xgammon.xbm"
+    "XGammon-Buttons"       "/u/local/3dpixmaps/bitmap/mini_xgammon.xbm"
+    "Kapman"                "/u/local/3dpixmaps/bitmap/mini_xlogo.xbm"
+    "Kiriki"                "/u/local/3dpixmaps/bitmap/dice6.xbm"
+    "Kpat"                  "/u/local/3dpixmaps/bitmap/card_club.xbm"
+    "Klondike"              "/u/local/3dpixmaps/bitmap/card_club.xbm"
+    "Firefox"               "/u/local/3dpixmaps/bitmap/mini_xlogo.xbm"
+    "Navigator"             "/u/local/3dpixmaps/bitmap/mini_xlogo.xbm"
+    "navigator:browser"     "/u/local/3dpixmaps/bitmap/mini_xlogo.xbm"
+    "netscape"              "/u/local/3dpixmaps/bitmap/mini_xlogo.xbm"
+    "gpicview"              "/u/local/3dpixmaps/bitmap/mini_paint2.xbm"
+}
+
+##############################################################################
+# KEYS
+##############################################################################
+Button1 =	: root		: f.menu "TwmWindows"
+Button2 =       : root		: f.menu "Mroot_middle_button"
+Button3 =       : root		: f.menu "Mroot_right_button"
+Button3 = m	: root		: f.menu "menu_apps"
+Button3 = c	: root		: f.menu "menu_games"
+
+Button1 = m	: window|icon	: f.function "move-or-lower"
+Button2 = m	: window|icon	: f.iconify
+Button3 = m	: window|icon	: f.function "move-or-raise"
+
+Button1 =	: title		: f.function "move-or-raise"
+Button2 =	: title		: f.raiselower
+Button3 =	: title		: f.menu "Mtitle_menu"
+
+Button1 =	: icon		: f.function "move-or-iconify"
+Button2 =	: icon		: f.iconify
+
+Button1 =	: iconmgr	: f.iconify
+Button2 =	: iconmgr	: f.iconify
+
+Button1 =       : frame         : f.resize
+Button1 = m     : frame         : f.move
+Button2 =       : frame         : f.raiselower
+
+#------------------------------------------------------------------------------
+# keyboard bindings
+#------------------------------------------------------------------------------
+"F1"	= m : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 1"
+"F2"	= m : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 2"
+"F3"	= m : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 3"
+"F4"	= m : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 4"
+"F5"	= m : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 5"
+"F6"	= m : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 6"
+"F7"	= m : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 7"
+"F8"	= m : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 8"
+
+"r"     = m4 : all	: f.restart    # restart twm
+"1"     = m4 : all	: f.iconify    # iconify/deiconify window
+"2"     = m4 : all	: f.zoom       # vertical zoom
+"3"	= m4 : all	: f.horizoom
+"4"	= m4 : all	: f.fullzoom
+"q"	= m4 : all	: f.delete     # kill the window
+"F1"	= m4 : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 1"
+"F2"	= m4 : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 2"
+"F3"	= m4 : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 3"
+"F4"	= m4 : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 4"
+"F5"	= m4 : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 5"
+"F6"	= m4 : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 6"
+"F7"	= m4 : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 7"
+"F8"	= m4 : all	: f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 8"
+
+"Up"     = m4 : all : f.upiconmgr
+"Left"   = m4 : all : f.lefticonmgr
+"Right"  = m4 : all : f.righticonmgr
+"Down"   = m4 : all : f.downiconmgr
+
+"Up"     = c&m : all : f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 prev"
+"Left"   = c&m : all : f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 prev"
+"Right"  = c&m : all : f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 next"
+"Down"   = c&m : all : f.exec "~/.twm_themes/bin/vdesk-swap.sh 8 next"
+
+### in warp.txt
+## "Tab"   = m : all	: f.lower      # lower current window
+## "Tab"   = m4 : all	: f.lower      # lower current window
+
+###############################################################################
+# WARP
+###############################################################################
+
+"Tab"   = m     : all : f.warpring "next"
+"Tab"   = mod4  : all : f.warpring "prev"
+
+WarpCursor
+
+#--- which windows to warp to
+WindowRing
+{
+	"IBM Notes"
+	"agnclient"
+	"ibm-notes9-zap"
+	"RightTimeRefeed"
+	"SAP GUI for Java"
+	"Audacious"
+	"Gimp"
+	"gimp"
+	"Calendar"
+	"GVim"
+	"LyX"
+	"Mozilla-bin"
+	"Navigator"
+	"Thunderbird"
+	"VIM"
+	"Vim"
+	"XGammon"
+	"XTerm"
+	"XbmBrowser"
+	"Xfm"
+	"aterm"
+	"cbb"
+	"elvis"
+	"emacs"
+	"gvim"
+	"ical"
+	"lavaps"
+	"libreoffice"
+	"lyx"
+	"netscape"
+	"rxvt"
+	"wmagnify"
+	"magnify"
+	"gnome-terminal"
+	"soffice"
+	"xfig"
+	"xless"
+	"Xmessage"
+	"xpaint"
+	"xterm"
+	"xv"
+	"amarok"
+	"xmms"
+}
+
+###############################################################################
+# Menus
+###############################################################################
+menu "menu_Zoom"
+{
+	"Toggle Fullzoom"	f.fullzoom
+	"Toggle Horizoom"	f.horizoom
+	"Toggle Vertzoom"	f.zoom
+}
+
+menu "menu_others"	
+{
+	" Shells "		f.title
+ 	"rxvt 24"	f.exec "rxvt -fn '-*-terminus-bold-r-normal-*-24-*-*-*-*-*-*-*' &"
+ 	"rxvt 28"	f.exec "rxvt -fn '-*-terminus-bold-r-normal-*-28-*-*-*-*-*-*-*' &"
+ 	"rxvt 32"	f.exec "rxvt -fn '-*-terminus-bold-r-normal-*-32-*-*-*-*-*-*-*' &"
+ 	"rxvt 20"	f.exec "rxvt -fn 10x20 &"
+	""		f.nop
+	"rxvt cyan"	f.exec "rxvt -ls -bg black -fg cyan &"
+	"rxvt Medium"	f.exec "rxvt  -ls -fg black -bg azure3 -sl 500 -fn 5x10 &"
+	"rxvt small"	f.exec "rxvt -ls -fn 6x12 -fg black -bg FloralWhite &"
+	""		f.nop
+}
+
+menu "menu_graphics"
+{
+	" Graphics "	f.title
+	"Spreadsheet"		f.exec "scalc &"
+	"Word Processor"	f.exec "swriter &"
+	"Presentation"		f.exec "simpress &"
+	"Database"		f.exec "sbase &"
+	"Math Editor"		f.exec "smath &"
+	"Draw"			f.exec "sdraw &"
+	"Open Office Main"	f.exec "soffice &"
+	"Printer Admin"		f.exec "spadmin &"
+	""			f.nop
+	"gimp"			f.exec "gimp &"
+	"xfig"			f.exec "xfig &"
+	"xpaint"		f.exec "xpaint &"
+	"xv"			f.exec "xv &"
+}
+
+menu "menu_games"
+{
+	" GAMES "	f.title
+	"Xbackgammon"	f.exec "xgammon &"
+	"Xmahjongg"	f.exec "xmahjongg.sh &"
+	"Xspacewarp"	f.exec "xspacewarp &"
+	"Xonix"		f.exec "xonix &"
+	""		f.nop
+	"Xsok"		f.exec "xsok &"
+	"Xsoldier"	f.exec "xsoldier &"
+	"XKobo"		f.exec "kobodl &"
+}
+menu "menu_util"
+{
+	" Utilities "		f.title
+	"Edit Config" 		f.exec "gvim ~/.twmrc &"
+	""			f.nop
+	"Stick ALL vdesk"	f.exec "$HOME/.twm_themes/bin/vdesk_sticky.sh &"
+	""			f.nop
+	"Xmag"			f.exec "xmag &"
+	"Xcalc"			f.exec "xcalc &"
+	"xbmbrowser"		f.exec "xbmbrowser -geometry 550x550 &"
+	""			f.nop
+	"xbiff"			f.exec "xbiff &"
+	"XNetload"		f.exec "xnetload &"
+	"xclipboard"		f.exec "xclipboard &"
+}
+
+menu "menu_apps"
+{
+	" Applications "	f.title
+	"Firefox"		f.exec "firefox &"
+	"Thunderbird"		f.exec "thunderbird &"
+	""			f.nop
+	"GNU Emacs"		f.exec "emacs &"
+	"Seamonkey"		f.exec "seamonkey &"
+	""			f.nop
+	"amarok"		f.exec "amarok &"
+	"audacious"		f.exec "audacious &"
+	"xmms"			f.exec "xmms &"
+}
+
+menu "Mtitle_menu" 
+{
+	" Window "	f.title
+	"Resize"	f.resize
+	"Move"		f.move
+	"Iconify"	f.iconify
+	"Refresh"	f.winrefresh
+	""		f.nop
+	"Identify"	f.identify
+	"raise"         f.raise
+	"lower"         f.lower
+	"autoraise"	f.autoraise
+	""		f.nop
+	"Show Iconmamager"	f.showiconmgr
+	"Hide Iconmamager"	f.hideiconmgr
+	"Zoom"		f.menu "menu_Zoom"
+	""		f.nop
+	"Delete"	f.delete
+	"Destroy"	f.destroy
+}
+
+menu "Mroot_middle_button"
+{
+	" Arrange "	f.title
+	"Resize"	f.resize
+	"Iconify"	f.iconify
+	"Move"		f.move
+	""		f.nop
+	"Refresh"	f.winrefresh
+	"Identify"	f.identify
+	"autoraise"	f.autoraise
+	"raise"         f.raise
+	"lower"         f.lower
+	""		f.nop
+	"Zoom"		f.menu "menu_Zoom"
+	"Show Iconmamager"	f.showiconmgr
+	"Hide Iconmamager"	f.hideiconmgr
+	""		f.nop
+	"Send Delete"	f.delete
+	"Kill Window"	f.destroy
+}
+
+menu "Mroot_right_button"
+{
+	" jmcL  "	f.title
+	"Terms"		f.menu "menu_others"
+	"Applications"	f.menu "menu_apps"
+	"Utilities"	f.menu "menu_util"
+	"Office/graphics"	f.menu "menu_graphics"
+	"Games"			f.menu "menu_games"
+	""		f.nop
+	"Window Ops"	f.menu "Mroot_middle_button"
+	"Stick Client"	f.exec "~/.twm_themes/bin/stick_client.sh &" 
+	""		f.nop
+	"lock screen"	f.exec "xscreensaver-command -lock &" 
+	"Exit"		f.quit
+}
+
+### END
