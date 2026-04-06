@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#
+
+FILE=$1
+HEADERFILE="${FILE}.h"
+IMPLFILE="${FILE}.cpp"
+FUNC="${FILE:3}"
+HEADER=${FUNC^^}_H
+
+#HEADER=${1^^}
+#HEADER=${HEADER:3}_H
+
+cat << EOF > "${HEADERFILE}"
+#ifndef ${HEADER}
+#define ${HEADER}
+
+class ${FUNC^} {
+public:
+    static void run();
+};
+
+#endif
+EOF
+
+cat << EOF > "${IMPLFILE}"
+#include "${HEADERFILE}"
+#include <iostream>
+
+void ${FUNC^}::run() {
+
+}
+
+EOF
+
+if [ -d "$PWD/src" ]; then
+    mv ${HEADERFILE} ${IMPLFILE} src/
+fi
+
+# to uppercase
+# "${string^^}" - to convert entire string
+# "${string^}" - to convert only the first charactyer
+# to lowercase
+# "${string,,}" - to convert enter string
+# "${string,}" - to convert only the first character
+#
+# substring or removing initial characters
+# ${parameter:offset}
+#    static void ${FUNC}_run();

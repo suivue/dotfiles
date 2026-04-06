@@ -1,0 +1,12 @@
+#!/bin/sh
+
+DEST="$HOME/Downloads/ISOs"
+if [ ! -d "$DEST" ]; then
+    mkdir -p "$DEST"
+fi
+FLAVOR=""
+REL="resolute"
+URL="http://cdimage.ubuntu.com/${FLAVOR}/daily-live/current/${REL}-desktop-amd64.iso.zsync"
+
+cd $DEST
+zsync $URL

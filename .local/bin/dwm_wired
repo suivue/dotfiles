@@ -1,0 +1,6 @@
+#!/bin/sh
+
+netstate="$(cat /sys/class/net/eth0/operstate)"
+ip0="$(ip a | grep -B0 -A1 eth0 | grep inet | awk '{print $2}')"
+icon=" "
+printf "%s %s %s \\n" "$icon" "$netstate" "$ip0"

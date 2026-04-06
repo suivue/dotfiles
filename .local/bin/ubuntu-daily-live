@@ -2,8 +2,11 @@
 # script to download/update ubuntu daily-live isos
 #
 DEST=$HOME/Downloads/ISOs
+if [ ! -d "$DEST" ]; then
+    mkdir -p "$DEST"
+fi
 FLAVOR=""
-REL="plucky"
+REL="resolute"
 
 select NAME in ubuntu kubuntu ubuntu-mate xubuntu lubuntu
 do
@@ -15,15 +18,14 @@ echo "$FLAVOR selected."
 URL="http://cdimage.ubuntu.com/$FLAVOR/daily-live/current/$REL-desktop-amd64.iso.zsync"
 
 cd $DEST
-echo "Directory changed to $PWD"
-read -p "Press 'Enter' to continue or 'q' to quit? " input 
+read -p "Press 'Enter' to continue or 'q' to quit? " input
 case $input in
         'q'|'Q'|'quit'|'Quit')
                 echo "Quitting..."
                 exit
                 ;;
         *)
-                echo "Downloading/updating..."
+                echo "Syncing..."
                 zsync $URL
                 ;;
 esac

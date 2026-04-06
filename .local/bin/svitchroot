@@ -1,16 +1,15 @@
 #!/bin/bash
 #
-# A NEWBIE script to help avoid typing multiple mount commands for a 
+# A simple script to help avoid typing multiple mount commands for a 
 # chroot session
-#
-# - sv@suivue.net
+# - sv
 #
 
 usage() {
 #        echo 'Arguments passed: "$#", required 2'
         echo 'Usage:'
-        printf '\t[sudo] newb_chroot <device> <mount_point>\n'
-        printf '\te.g., sudo newb_chroot /dev/sdb2 /mnt/bootstrap\n'
+        printf '\t[sudo] svitchroot <device> <mount_point>\n'
+        printf '\te.g., sudo svitchroot /dev/sdb2 /mnt/bootstrap\n'
 }
 
 mount_efi() {

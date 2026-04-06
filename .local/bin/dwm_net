@@ -1,6 +1,0 @@
-#!/bin/bash
-
-net="$(cat /sys/class/net/wlan0/operstate)"
-icon=" "
-printf "%s %s \\n" "$icon" "$net"
-
