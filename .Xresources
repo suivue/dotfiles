@@ -5,11 +5,11 @@
 
 !!Xft settings
 !!------------
-!!For hdpi screens
-*dpi: 110
-Xft.dpi: 110
 !!For regular screens
 !Xft.dpi: 96
+!!For hdpi screens
+!*dpi: 110
+!Xft.dpi: 110
 Xft.antialias: true
 Xft.hinting: true
 Xft.autohint: false
@@ -74,7 +74,8 @@ xterm*termName: xterm-256color
 xterm*title: Terminal (XTerm)
 !XTerm*font: -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
 !XTerm*faceName: xft:monospace:pixelsize=14
-XTerm*faceName: xft:Cascadia Code:style=Light:size=11
+!XTerm*faceName: xft:Cascadia Code:style=Light:size=11
+*faceName: xft:monospace:size=11
 !XTerm*allowBoldFonts: false
 XTerm*selectToClipboard: true
 
@@ -82,7 +83,8 @@ XTerm*selectToClipboard: true
 !!--------------
 !urxvt*font: -misc-fixed-medium-r-normal--15-*-*-*-*-*-*-*
 !URxvt*font: xft:Monospace:pixelsize=14
-URxvt*font: xft:Cascadia Code:style=Light:size=11
+!URxvt*font: xft:Cascadia Code:style=Light:size=11
+URxvt*font: xft:Monospace:size=11
 !!Disable bold fonts in URxvt
 !URxvt*boldFont:
 !URxvt*lineSpacing: 0
@@ -95,7 +97,7 @@ URxvt.geometry: 400x400
 
 
 !!Keyboard combinations like in other 'advanced' terminals.
-!!Source: 
+!!Source:
 !!1) Arch wiki
 !!2) http://www.futurile.net/2016/06/14/xterm-setup-and-truetype-font-\
 !!                                                                configuration
@@ -110,7 +112,7 @@ URxvt.geometry: 400x400
 
 ! Initially copy-paste was not working with above settings.
 ! It seems <Keypress> in
-!       "Shift <Keypress> Insert: insert-selection(CLIPBOARD) \n\"
+!       "Shift <Keypress> Insert: insert-selection(CLIPBOARD) \n\ "
 ! was causing the problem. By chance, I saw the following warning on one
 ! of the setup and after changing <Keypress> to <Key> copy-paste works.
 !Warning: translation table syntax error: Unknown event type :   Keypress
