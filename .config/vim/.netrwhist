@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/sv/dotfiles/.config/vim'
+let g:netrw_dirhist_2='/home/sv/dotfiles/.config/vim/plugins'
+let g:netrw_dirhist_1='/home/sv/Downloads/dotfiles-pod/dotfiles-pod-main/.config/fontconfig'
+let g:netrw_dirhist_0='/home/sv/Downloads/dotfiles-pod/dotfiles-pod-main/.config'
+let g:netrw_dirhist_9='/home/sv'
+let g:netrw_dirhist_8='/home/sv/.vim'
+let g:netrw_dirhist_7='/home/sv/sandbox/local/learn-to-code/python/test'
+let g:netrw_dirhist_6='/home/sv/sandbox'
+let g:netrw_dirhist_5='/home/sv/.vim/after/ftplugin/c.vim'
+let g:netrw_dirhist_4='/home/sv/sandbox/learn-to-code/java/test_outer_pkg'
