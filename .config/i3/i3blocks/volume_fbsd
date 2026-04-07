@@ -1,0 +1,34 @@
+#!/bin/sh
+# Copyright (C) 2018 Minbari
+# Copyright (C) 2026 suivue
+
+# Color
+color1="#6699ff"
+color2="#e60000"
+
+
+# Left click
+if [ "${BLOCK_BUTTON}" -eq 1 ]; then
+   mixer vol.volume=+5%
+# Middle click
+elif [ "${BLOCK_BUTTON}" -eq 2 ]; then
+   mixer vol.mute=toggle
+# Right click
+elif [ "${BLOCK_BUTTON}" -eq 3 ]; then
+   mixer vol.volume=-5%
+fi
+
+Volume=$(mixer vol.volume | cut -c12-15)
+# multiply Volume (which is float) with 100 then convert to integer
+Vol=$(expr "$Volume * 100/1" | bc)
+Mute=$(mixer vol.mute | cut -d'=' -f2)
+
+if [ "${Mute}" == "off" ]; then
+  echo "  ${Vol}%"
+  echo "  ${Vol}%"
+  echo "$color1"
+else
+   echo " "
+   echo " "
+   echo "$color2"
+fi  
