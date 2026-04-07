@@ -297,7 +297,7 @@ client.background       #F8F8F2
 bar {
         font pango: monospace 9
 #        status_command i3status -c ~/.config/i3/i3status.conf
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+        status_command i3blocks
         # mode dock(default)/hide/invisible
         #mode hide
         #hidden_state hide
