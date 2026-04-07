@@ -1,0 +1,47 @@
+# i3 configuration specific to GNU/Linux
+
+# Volume Controls:
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh
+_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh
+_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3stat
+us
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh
+_i3status
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        font pango: monospace 9, Literation Mono Nerd Font 9, DejaVuSansM Nerd Font 9
+#        status_command i3status -c ~/.config/i3/i3status.conf
+        status_command i3blocks
+        # mode dock(default)/hide/invisible
+        #mode hide
+        #hidden_state hide
+        #modifier Mod4
+        bindsym --release button3 exec --no-startup-id import ~/Pictures/Screenshots/Screenshot_$(date +
+%Y%m%d%H%M%S).png
+        #default vertical, 1px think separator
+        #separator_symbol "|"
+        #separator_symbol "-"
+        # comment out following to enable transparency in i3bar
+        # then use alpha value for colors like #000000ff
+        #i3bar_command i3bar --transparency
+        # dracula theme
+        #colors {
+        #        background #282A36
+        #        statusline #F8F8F2
+        #        separator  #44475A
+    
+        #        focused_workspace  #44475A #44475A #F8F8F2
+        #        active_workspace   #282A36 #44475A #F8F8F2
+        #        inactive_workspace #282A36 #282A36 #BFBFBF
+        #        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        #        binding_mode       #FF5555 #FF5555 #F8F8F2
+        #}
+        ## padding similar to css. does not affect the font size
+        #padding 2px 0px
+}
+
