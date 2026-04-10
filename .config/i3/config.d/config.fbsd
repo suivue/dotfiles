@@ -1,22 +1,27 @@
 # i3 configuration specific to FreeBSD
 
 # Volume Controls:
-bindsym XF86AudioRaiseVolume exec --no-startup-id mixer vol.volume=+10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id mixer vol.volume=-10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id mixer vol.mute=toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id mixer mic.mute=toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id mixer vol.volume=+10% \
+            && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id mixer vol.volume=-10% \
+            && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id mixer vol.mute=toggle \
+            && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id mixer mic.mute=toggle \
+            && $refresh_i3status
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        font pango: monospace 9, Literation Mono Nerd Font 9, DejaVuSansM Nerd Font 9
+        font pango: monospace 9
+#        status_command i3status
         status_command i3blocks -c ~/.config/i3blocks/config-fbsd
         # mode dock(default)/hide/invisible
         #mode hide
         #hidden_state hide
         #modifier Mod4
         bindsym --release button3 exec --no-startup-id import \
-		 ~/Pictures/Screenshots/Screenshot_$(date +%Y%m%d%H%M%S).png
+		    ~/Pictures/Screenshots/Screenshot_$(date +%Y%m%d%H%M%S).png
         #default vertical, 1px thick separator
         #separator_symbol "|"
         #separator_symbol "~"
@@ -28,7 +33,6 @@ bar {
         #        background #282A36
         #        statusline #F8F8F2
         #        separator  #44475A
-    
         #        focused_workspace  #44475A #44475A #F8F8F2
         #        active_workspace   #282A36 #44475A #F8F8F2
         #        inactive_workspace #282A36 #282A36 #BFBFBF
